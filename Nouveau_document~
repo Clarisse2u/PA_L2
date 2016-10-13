@@ -9,14 +9,3 @@ g++ *.cpp `sdl-config --cflags --libs` -o test
 test est le nom du fichier exe (peut être changer)
 
 exécuter avec ./test
-
-
-afficher les lignes sur emacs:
-
-ALT x puis taper linum-mode
-
-indenter:
-
-sélectionner la partie à indenter:
-
-ALT x puis indent-region

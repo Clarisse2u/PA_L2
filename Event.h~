@@ -1,0 +1,4 @@
+#ifndef Event_H
+#define Event_H
+
+void Handle_Event(SDL_Event event, int var);
