@@ -54,7 +54,3 @@
   void Monstre::SetVivant(bool nVivant) {
     vivant = nVivant;
   }
-
-// a supprimer 
-int main() {}
-

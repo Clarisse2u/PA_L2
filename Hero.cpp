@@ -86,7 +86,3 @@ string Hero::GetNom() {
   void Hero::SetVivant(bool nVivant) {
     vivant = nVivant;
   }
-
-
-// à supprimer
-int main()  {}
