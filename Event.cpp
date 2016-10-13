@@ -34,17 +34,17 @@ void HandleEvent(SDL_Event event, int &var,  short int &x, short int &y)
 	case SDLK_DOWN:
 	  /*tmp = 'b';
 	    y = se Deplacer(tmp);*/
-	  if (y<480)y+=20;
+	  if (y<415)y+=20;
 	  break;
 	  case SDLK_LEFT:
 	  /*tmp = 'g';
 	    x = seDeplacer(tmp);*/
-	  if (y>0)x-=20;
+	  if (x>0)x-=20;
 	  break;
 	case SDLK_RIGHT:
 	  /*tmp = 'd';
 	    x = se Deplacer(tmp);*/
-	  if (y<720)x+=20;
+	  if (x<645)x+=20;
 	  break;
 	}
       break;

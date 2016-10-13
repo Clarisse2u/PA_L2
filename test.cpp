@@ -6,9 +6,12 @@
 int main(int argc, char *argv[])
 {
   int game = 0;
-  SDL_Surface *screen = NULL, *PlayerMenu = NULL, *Hero = NULL;
-  SDL_Rect position, PosHero;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL;
+  SDL_Rect position, PosHero, GamePos;
   SDL_Event event;
+
+  GamePos.x = 0;
+  GamePos.y = 0;
 
   position.x=640;
   position.y=0;
@@ -21,11 +24,13 @@ int main(int argc, char *argv[])
   screen = SDL_SetVideoMode(720, 480, 32, SDL_HWSURFACE); // Ouvrir une fenetre
   SDL_WM_SetCaption("Test pour projet PA", NULL); //titre fenetre
 
-  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 480, 32, 0, 0, 0, 0);
+  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 480, 32, 255, 255, 255, 0);
+  GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 640, 480, 32, 14, 158, 24, 0);
+  SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
-  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 14, 158, 24));
   Hero = SDL_LoadBMP("key.bmp");
   
+  SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
   SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
   SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
       
@@ -34,8 +39,12 @@ int main(int argc, char *argv[])
   while(!game)
     {
       HandleEvent(event, game, PosHero.x, PosHero.y);
-      
+  
+      SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
+      SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
+
+      SDL_Flip(screen);
     }
       
   
