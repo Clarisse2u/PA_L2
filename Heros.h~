@@ -1,0 +1,12 @@
+#ifndef Heros_h
+#define Heros_h
+
+void setVie(int vie);
+
+void getVie(int p);
+
+void 
+
+
+
+#endif

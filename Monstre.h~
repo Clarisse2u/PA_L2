@@ -1,0 +1,28 @@
+#ifndef Monstre_h
+#define Monstre_h
+
+void setVie();
+
+void getVie();
+
+ string GetNom() {
+    return nom;
+  }
+
+   int GetPdv() {
+    return pdv;
+  }
+
+ int GetPosx() {
+    return posx;
+  }
+
+ int GetPosy() {
+    return posy;
+  }
+
+ boolean GetMort() {
+    return mort;
+  }
+
+#endif

@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "Monstre.h"
+
+
+class Heros {
+
+  // attributs
+
+  string nom;
+  int posx, posy, pdv, exp, lvl, atk, def, ang;
+  boolean vivant;
+  
+  // méthodes
+
+  void seDeplacer(char i){
+    switch (i) {
+    case 'h': 
+      posy--;
+      break;
+    case 'b':
+      posy++;
+      break;
+    case 'g': 
+      psox--;
+      break;
+    case 'd':
+      posx++;
+      break;
+    }
+  }
+
+  void attaquer(Monstre m){
+    m.SetPdv(m.GetPdv()-atk);
+  }
+
+  void estVivant(){
+    if (pdv < 1) {
+      vivant = false;
+    }
+  }
+
+// getteur 
+
+  string GetNom() {
+    return nom;
+  }
+
+   int GetPdv() {
+    return pdv;
+  }
+
+ int GetPosx() {
+    return posx;
+  }
+
+ int GetPosy() {
+    return posy;
+  }
+
+ boolean GetMort() {
+    return mort;
+  }
+
+  // setteur
+  
+ void SetNom(string nouveauNom) {
+    nom = nouveauNom;
+  }
+
+   void SetPdv(int nPdv) {
+    pdv = nPdv;
+  }
+
+  void SetPosx(int nPosx) {
+    posx = nPosx;
+  }
+
+  void SetPosy(int nPosy) {
+    posy = nPosy;
+  }
+
+  void SetVivant(boolean nVivant) {
+    vivant = nVivant;
+  }
+
+
+
+
+
+}
