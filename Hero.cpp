@@ -17,19 +17,21 @@
     ang = 270;
   }
 
-  void Hero::seDeplacer(char i){
+
+void Hero::seDeplacer(char i){
     switch (i) {
-    case 'h': 
-      posy--;
+    case 'h':
+      posy-=20;
+      printf("%d\n", posy);
       break;
     case 'b':
-      posy++;
+      posy+=20;
       break;
     case 'g': 
-      posx--;
+      posx-=20;
       break;
     case 'd':
-      posx++;
+      posx+=20;
       break;
     }
   }

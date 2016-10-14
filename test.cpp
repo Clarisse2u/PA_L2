@@ -7,12 +7,14 @@
 
 int main(int argc, char *argv[])
 {
-  Hero h = Hero(360,240);
+  Hero h = Hero(360-38,240-38);
   int game = 0, MapNumber = 1;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall = NULL;
-  SDL_Rect position, PosHero, GamePos, WallPos;
+  SDL_Rect PosMenu, PosHero, GamePos, WallPos;
   SDL_Event event;
 
+  printf("%d\n", h.posy);
+  
   WallPos.x = 0;
   WallPos.y = 0;
   WallPos.w = 20;
@@ -21,11 +23,11 @@ int main(int argc, char *argv[])
   GamePos.x = 0;
   GamePos.y = 0;
 
-  position.x=640;
-  position.y=0;
+  PosMenu.x=640;
+  PosMenu.y=0;
   
-  PosHero.x = 720/2 - 38;
-  PosHero.y = 480/2 - 38;
+  PosHero.x = h.posx;
+  PosHero.y = h.posy;
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
   SDL_SetColorKey(Wall, SDL_SRCCOLORKEY, SDL_MapRGB(Wall->format, 84, 109, 142));
   
   SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
-  SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
+  SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
   SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
       
   SDL_Flip(screen); //actualiser l'ecran
@@ -52,15 +54,20 @@ int main(int argc, char *argv[])
   while(!game)
     {
       HandleEvent(event, game, h);
-  
+      
+      PosHero.x = h.posx;
+      PosHero.y = h.posy;
+
+
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
-      SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
+      SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
       
-      int tab = Map::returnMap(MapNumber);
+      /*int tab[24][32];
+      returnMap(MapNumber,tab);
       
-      for(int i=0; i<23; i++){
-	for(int j=0; j<31; j++){
+      for(int i=0; i<24; i++){
+	for(int j=0; j<32; j++){
 	  WallPos.x = 20*j;
 	  WallPos.y = 20*i;
 	  if(tab[j][i]=0) continue;
@@ -71,9 +78,9 @@ int main(int argc, char *argv[])
 		SDL_BlitSurface(Wall, NULL, screen, &WallPos);
 		break;
 	      }	
-	  }
-	}
-      }
+	      }
+	      }
+	      }*/
 	  
 
       SDL_Flip(screen);
@@ -83,5 +90,5 @@ int main(int argc, char *argv[])
   SDL_FreeSurface(Hero);
   SDL_Quit(); // Arret SDL
 
-  return EXIT_SUCCESS; //Fin
+  return 0; //Fin
 }
