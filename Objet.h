@@ -17,7 +17,7 @@ class Objet
   
   // méthodes
   Objet(int x,int y, string nom);
-  placer(int x, int y);
+  void placer(int x, int y);
 
   // getteur 
   string GetNom();
