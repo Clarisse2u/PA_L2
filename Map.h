@@ -6,6 +6,7 @@
 
 class Map
 {
+ public:
   int tab1[32][24];  
 
 };

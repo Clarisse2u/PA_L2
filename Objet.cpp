@@ -12,18 +12,18 @@ Objet::Objet(int x,int y, string nom) {
   estRamasse = false;
 }
 
-Objet::placer(int x, int y) {
+void Objet::placer(int x, int y) {
   posx = x;
   posy = y;
 }
 
 // getteur 
 string Objet::GetNom() {
-  return nom 
+  return nom;
     }
 
 int Objet::GetPosx()  {
-  return posx 
+  return posx;
     }
 
 int Objet::GetPosy()  {
@@ -31,7 +31,7 @@ int Objet::GetPosy()  {
 }
 
 bool Objet::GetEstRamasse() {
-  return estRamasse
+  return estRamasse;
     }
 
 // setteur

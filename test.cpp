@@ -2,13 +2,21 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include "Event.h"
+#include "Map.h"
+#include "Hero.h"
 
 int main(int argc, char *argv[])
 {
+  Hero h = Hero(360,240);
   int game = 0;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL;
-  SDL_Rect position, PosHero, GamePos;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall = NULL;
+  SDL_Rect position, PosHero, GamePos, WallPos;
   SDL_Event event;
+
+  WallPos.x = 0;
+  WallPos.y = 0;
+  WallPos.w = 20;
+  WallPos.h = 20;
 
   GamePos.x = 0;
   GamePos.y = 0;
@@ -28,7 +36,12 @@ int main(int argc, char *argv[])
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 640, 480, 32, 14, 158, 24, 0);
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
+  
   Hero = SDL_LoadBMP("key.bmp");
+  Wall = SDL_LoadBMP("wall.bmp");
+
+  SDL_SetColorKey(Hero, SDL_SRCCOLORKEY, SDL_MapRGB(Hero->format, 255, 255, 255));
+  SDL_SetColorKey(Wall, SDL_SRCCOLORKEY, SDL_MapRGB(Wall->format, 84, 109, 142));
   
   SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
   SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
@@ -38,11 +51,28 @@ int main(int argc, char *argv[])
   
   while(!game)
     {
-      HandleEvent(event, game, PosHero.x, PosHero.y);
+      HandleEvent(event, game, h);
   
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
       SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
+
+      for(int i=0; i<23; i++){
+	for(int j=0; j<31; j++){
+	  WallPos.x = 20*j;
+	  WallPos.y = 20*i;
+	  if(Map::tab1[j][i]=0) continue;
+	  else{
+	    switch(Map::tab1[j][i])
+	      {
+	      case 1:
+		SDL_BlitSurface(Wall, NULL, screen, &WallPos);
+		break;
+	      }	
+	  }
+	}
+      }
+	  
 
       SDL_Flip(screen);
     }
