@@ -7,7 +7,7 @@
 class Map
 {
  public:
-  int tab1[32][24];  
+  int tab1[24][32];  
 
 };
 #endif
