@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
   Hero h = Hero(360,240);
-  int game = 0;
+  int game = 0, MapNumber = 1;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall = NULL;
   SDL_Rect position, PosHero, GamePos, WallPos;
   SDL_Event event;
@@ -56,14 +56,16 @@ int main(int argc, char *argv[])
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
       SDL_BlitSurface(PlayerMenu, NULL, screen, &position);
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
-
+      
+      int tab = Map::returnMap(MapNumber);
+      
       for(int i=0; i<23; i++){
 	for(int j=0; j<31; j++){
 	  WallPos.x = 20*j;
 	  WallPos.y = 20*i;
-	  if(Map::tab1[j][i]=0) continue;
+	  if(tab[j][i]=0) continue;
 	  else{
-	    switch(Map::tab1[j][i])
+	    switch(tab[j][i])
 	      {
 	      case 1:
 		SDL_BlitSurface(Wall, NULL, screen, &WallPos);

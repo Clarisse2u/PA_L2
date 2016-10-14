@@ -4,10 +4,7 @@
 #ifndef Map_H
 #define Map_H
 
-class Map
-{
- public:
-  int tab1[24][32];  
+ 
 
-};
+int returnMap(int i); 
 #endif
