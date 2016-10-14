@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string>
+
+#ifndef Map_H
+#define Map_H
+
+using namespace std;
+
+class Map
+{
+  char tab1[32][24];  
+
+};
+#endif
