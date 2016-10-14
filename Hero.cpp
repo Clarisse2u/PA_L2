@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string>
 #include "Hero.h"
-
-
-
+#include "Monstre.h"
 
 
   Hero::Hero(int x, int y) {
@@ -36,12 +34,17 @@
     }
   }
 
-  /*
  void Hero::attaquer(Monstre m){
     m.SetPdv(m.GetPdv()-atk);
     }
-  */
 
+bool estVivant() {
+  if (pdv < 1) {
+    vivant = false;
+  }
+  return vivant;
+}
+  
   
 // getteur 
 

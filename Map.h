@@ -6,7 +6,7 @@
 
 class Map
 {
-  char tab1[32][24];  
+  int tab1[32][24];  
 
 };
 #endif
