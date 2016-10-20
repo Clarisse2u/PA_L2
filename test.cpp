@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
   SDL_Rect PosMenu, PosHero, GamePos, WallPos;
   SDL_Event event;
 
+  
   int tab[24][32]={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -38,8 +39,6 @@ int main(int argc, char *argv[])
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 
-  printf("%d\n", h.posy);
-  
   //Positions
   WallPos.x = 0;
   WallPos.y = 0;
@@ -58,6 +57,7 @@ int main(int argc, char *argv[])
   SDL_Init(SDL_INIT_VIDEO);
   
   screen = SDL_SetVideoMode(720, 480, 32, SDL_HWSURFACE); // Ouvrir une fenetre
+  SDL_EnableKeyRepeat(150, 150);
   SDL_WM_SetCaption("Test pour projet PA", NULL); //titre fenetre
 
   PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 480, 32, 255, 255, 255, 0);
@@ -65,8 +65,8 @@ int main(int argc, char *argv[])
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
-  Hero = SDL_LoadBMP("key.bmp");
-  Wall = SDL_LoadBMP("wall.bmp");
+  Hero = SDL_LoadBMP("heros.bmp");
+  Wall = SDL_LoadBMP("wall1.bmp");
 
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY, SDL_MapRGB(Hero->format, 255, 255, 255));
   SDL_SetColorKey(Wall, SDL_SRCCOLORKEY, SDL_MapRGB(Wall->format, 84, 109, 142));
@@ -96,18 +96,12 @@ int main(int argc, char *argv[])
         for(int j=0; j<32; j++){
             WallPos.x = 20*j;
             WallPos.y = 20*i;
-            if(tab[i][j]=0) continue;
-            else{
-                switch(tab[i][j])
-                    {
-                        case 1:
-			  
-                            SDL_BlitSurface(Wall, NULL, screen, &WallPos);
-                        break;
-                    }
-                }
-	      }
+            if(tab[i][j]==0) continue;
+            else if (tab[i][j]==1){
+	      SDL_BlitSurface(Wall, NULL, screen, &WallPos);
+	}
       }
+    }
 	  
 
       SDL_Flip(screen);
