@@ -4,8 +4,16 @@
 #ifndef Map_H
 #define Map_H
 
- 
+ class Map 
+ {
 
+ public: 
+   // attributs 
+  static const int tab1[24][32];
+
+   
 void returnMap(int i,int tab[24][32]); 
 
+
+ };
 #endif
