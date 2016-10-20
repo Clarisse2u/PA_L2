@@ -4,7 +4,7 @@
 #include "Event.h"
 #include "Hero.h"
 
-void HandleEvent(SDL_Event event, int &var, Hero h)
+void HandleEvent(SDL_Event event, int &var, Hero &h)
 {
   char tmp;
   SDL_PollEvent(&event);
@@ -21,7 +21,7 @@ void HandleEvent(SDL_Event event, int &var, Hero h)
 	  break;
 	}
       break;
-      case SDL_KEYDOWN:
+    case SDL_KEYDOWN:
       switch (event.key.keysym.sym)
 	{
 	case SDLK_UP:
@@ -37,10 +37,10 @@ void HandleEvent(SDL_Event event, int &var, Hero h)
 	    h.seDeplacer(tmp);
 	  }
 	  break;
-	  case SDLK_LEFT:
-	    if (h.posx>0){
-	      tmp = 'g';
-	      h.seDeplacer(tmp);
+	case SDLK_LEFT:
+	  if (h.posx>0){
+	    tmp = 'g';
+	    h.seDeplacer(tmp);
 	    }
 	  break;
 	case SDLK_RIGHT:

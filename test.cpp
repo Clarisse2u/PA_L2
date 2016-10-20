@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
   printf("%d\n", h.posy);
   
+  //Positions
   WallPos.x = 0;
   WallPos.y = 0;
   WallPos.w = 20;
@@ -63,24 +64,24 @@ int main(int argc, char *argv[])
       SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
       
-      /*int tab[24][32];
+      int tab[24][32];
       returnMap(MapNumber,tab);
       
       for(int i=0; i<24; i++){
-	for(int j=0; j<32; j++){
-	  WallPos.x = 20*j;
-	  WallPos.y = 20*i;
-	  if(tab[j][i]=0) continue;
-	  else{
-	    switch(tab[j][i])
-	      {
-	      case 1:
-		SDL_BlitSurface(Wall, NULL, screen, &WallPos);
-		break;
-	      }	
+        for(int j=0; j<32; j++){
+            WallPos.x = 20*j;
+            WallPos.y = 20*i;
+            if(tab[j][i]=0) continue;
+            else{
+                switch(tab[j][i])
+                    {
+                        case 1:
+                            SDL_BlitSurface(Wall, NULL, screen, &WallPos);
+                        break;
+                    }
+                }
 	      }
-	      }
-	      }*/
+      }
 	  
 
       SDL_Flip(screen);
@@ -88,6 +89,7 @@ int main(int argc, char *argv[])
       
   
   SDL_FreeSurface(Hero);
+  SDL_FreeSurface(Wall);
   SDL_Quit(); // Arret SDL
 
   return 0; //Fin

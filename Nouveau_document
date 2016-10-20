@@ -2,7 +2,7 @@ https://github.com/ssloy/tinyrenderer/wiki
 https://github.com/ssloy/walkup
 
 ligne de compilation:
-g++ *.cpp `sdl-config --cflags --libs` -o test
+g++ *.cpp `sdl-config --cflags --libs` -o test -g
 
 
 *.cpp compile tous les fichiers cpp du dossier
