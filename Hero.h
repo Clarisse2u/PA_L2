@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include "Monstre.h"
 
 #ifndef Hero_H
 #define Hero_H
@@ -10,6 +11,7 @@ using namespace std;
 
 class Hero
 {
+ public:
   // attributs
   string nom;
   int posx, posy, pdv, exp, lvl, atk, ang;
@@ -18,14 +20,14 @@ class Hero
   // méthodes
   Hero(int x,int y);
   void seDeplacer(char i);
-  void attaquer();
+  void attaquer(Monstre m);
 
   // getteur 
-  string GetNom();
-  int GetPdv();
-  int GetPosx();
-  int GetPosy();
-  bool GetMort();
+  string GetNom(Hero h);
+  int GetPdv(Hero h);
+  int GetPosx(Hero h);
+  int GetPosy(Hero h);
+  bool GetMort(Hero h);
 
   // setteur
   void SetNom(string nouveauNom);

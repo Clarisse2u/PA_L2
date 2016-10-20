@@ -10,6 +10,7 @@ using namespace std;
 
 class Monstre
 {
+ public:
   // attributs
   string nom;
   int posx, posy, pdv, atk, ang;

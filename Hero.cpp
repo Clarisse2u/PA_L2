@@ -17,19 +17,21 @@
     ang = 270;
   }
 
-  void Hero::seDeplacer(char i){
+
+void Hero::seDeplacer(char i){
     switch (i) {
-    case 'h': 
-      posy--;
+    case 'h':
+      posy-=20;
+      printf("%d\n", posy);
       break;
     case 'b':
-      posy++;
+      posy+=20;
       break;
     case 'g': 
-      posx--;
+      posx-=20;
       break;
     case 'd':
-      posx++;
+      posx+=20;
       break;
     }
   }
@@ -38,34 +40,34 @@
     m.SetPdv(m.GetPdv()-atk);
     }
 
-bool estVivant() {
-  if (pdv < 1) {
-    vivant = false;
+bool estVivant(Hero h) {
+  if (h.pdv < 1) {
+    h.vivant = false;
   }
-  return vivant;
+  return h.vivant;
 }
   
   
 // getteur 
 
-string Hero::GetNom() {
-    return nom;
+string Hero::GetNom(Hero h) {
+    return h.nom;
   }
 
-   int Hero::GetPdv() {
-    return pdv;
+   int Hero::GetPdv(Hero h) {
+    return h.pdv;
   }
 
- int Hero::GetPosx() {
-    return posx;
+ int Hero::GetPosx(Hero h) {
+    return h.posx;
   }
 
- int Hero::GetPosy() {
-    return posy;
+ int Hero::GetPosy(Hero h) {
+    return h.posy;
   }
 
- bool Hero::GetMort() {
-    return vivant;
+ bool Hero::GetMort(Hero h) {
+    return h.vivant;
   }
 
   // setteur
