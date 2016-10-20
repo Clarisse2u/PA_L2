@@ -28,7 +28,6 @@ void HandleEvent(SDL_Event event, int &var, Hero &h)
 	  if (h.posy>0){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
-	    printf("%d\n", h.posy);
 	  }
 	  break;
 	case SDLK_DOWN:

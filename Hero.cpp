@@ -22,7 +22,6 @@ void Hero::seDeplacer(char i){
     switch (i) {
     case 'h':
       posy-=20;
-      printf("%d\n", posy);
       break;
     case 'b':
       posy+=20;

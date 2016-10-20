@@ -6,5 +6,5 @@
 
  
 
-void returnMap(int i,int tab[24][32]); 
+void returnMap(int i,const int tab[24][32]); 
 #endif
