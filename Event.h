@@ -4,6 +4,6 @@
 #ifndef Event_H
 #define Event_H
 
-void HandleEvent(SDL_Event event, int &var, Hero h);
+void HandleEvent(SDL_Event event, int &var, Hero &h);
 
 #endif
