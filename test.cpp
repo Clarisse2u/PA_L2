@@ -8,10 +8,11 @@
 int main(int argc, char *argv[])
 {
   Hero h = Hero(360-38,240-38);
-  int game = 0, MapNumber = 1, tab[24][32];
+  int game = 0, MapNumber = 1; //tab[24][32];
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Ground1 = NULL;
   SDL_Rect PosMenu, PosHero, GamePos, Wall1Pos, Ground1Pos;
   SDL_Event event;
+  Map m = Map();
 
   //Positions
   Wall1Pos.x = 0;
@@ -63,17 +64,17 @@ int main(int argc, char *argv[])
       SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
       
       
-      returnMap(MapNumber,tab);
+      m.returnMap(MapNumber);
       
       for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){
             
-            if(tab[i][j]==0){
+            if(m.mapCourante[i][j]==0){
 	      Ground1Pos.x = 20*j;
 	      Ground1Pos.y = 20*i;
 	      SDL_BlitSurface(Ground1, NULL, screen, &Ground1Pos);
 	    }
-            else if (tab[i][j]==1){
+            else if (m.mapCourante[i][j]==1){
 	      Wall1Pos.x = 20*j;
 	      Wall1Pos.y = 20*i;
 	      SDL_BlitSurface(Wall1, NULL, screen, &Wall1Pos);
@@ -85,12 +86,13 @@ int main(int argc, char *argv[])
       SDL_Flip(screen);
     }
 
-  /*for(int i=0; i<24; i++){
+  for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){
-	  printf("%d",tab[i][j]);
+	  printf("%d", m.mapCourante[i][j]);
+	  printf("T ");
 	}
 	printf("\n");
-	}*/
+	}
       
   
   SDL_FreeSurface(Hero);
