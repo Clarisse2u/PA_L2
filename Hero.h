@@ -14,13 +14,14 @@ class Hero
  public:
   // attributs
   string nom;
-  int posx, posy, pdv, exp, lvl, atk, ang;
+  int posx, posy, pdv, exp, lvl, atk, angle;
   bool vivant;
   
   // méthodes
   Hero(int x,int y);
   void seDeplacer(char i);
   void attaquer(Monstre m);
+  void changerAngle(int i);
 
   // getteur 
   string GetNom(Hero h);
