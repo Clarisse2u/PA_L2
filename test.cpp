@@ -9,15 +9,15 @@ int main(int argc, char *argv[])
 {
   Hero h = Hero(360-38,240-38);
   int game = 0, MapNumber = 1, tab[24][32];
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall = NULL;
-  SDL_Rect PosMenu, PosHero, GamePos, WallPos;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Ground1 = NULL;
+  SDL_Rect PosMenu, PosHero, GamePos, Wall1Pos, Ground1Pos;
   SDL_Event event;
 
   //Positions
-  WallPos.x = 0;
-  WallPos.y = 0;
-  WallPos.w = 20;
-  WallPos.h = 20;
+  Wall1Pos.x = 0;
+  Wall1Pos.y = 0;
+  Wall1Pos.w = 20;
+  Wall1Pos.h = 20;
 
   GamePos.x = 0;
   GamePos.y = 0;
@@ -40,10 +40,10 @@ int main(int argc, char *argv[])
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
   Hero = SDL_LoadBMP("heros.bmp");
-  Wall = SDL_LoadBMP("wall1.bmp");
+  Wall1 = SDL_LoadBMP("wall1.bmp");
+  Ground1 = SDL_LoadBMP("sol1.bmp");
 
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY, SDL_MapRGB(Hero->format, 255, 255, 255));
-  SDL_SetColorKey(Wall, SDL_SRCCOLORKEY, SDL_MapRGB(Wall->format, 84, 109, 142));
   
   SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
   SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
@@ -61,36 +61,41 @@ int main(int argc, char *argv[])
 
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
       SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
-      SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
       
       
       returnMap(MapNumber,tab);
       
       for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){
-            WallPos.x = 20*j;
-            WallPos.y = 20*i;
-            if(tab[i][j]==0) continue;
+            
+            if(tab[i][j]==0){
+	      Ground1Pos.x = 20*j;
+	      Ground1Pos.y = 20*i;
+	      SDL_BlitSurface(Ground1, NULL, screen, &Ground1Pos);
+	    }
             else if (tab[i][j]==1){
-	      SDL_BlitSurface(Wall, NULL, screen, &WallPos);
+	      Wall1Pos.x = 20*j;
+	      Wall1Pos.y = 20*i;
+	      SDL_BlitSurface(Wall1, NULL, screen, &Wall1Pos);
+	    }
 	}
       }
-    }
-	  
+      SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
 
       SDL_Flip(screen);
     }
 
-for(int i=0; i<24; i++){
+  /*for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){
 	  printf("%d",tab[i][j]);
 	}
 	printf("\n");
- }
+	}*/
       
   
   SDL_FreeSurface(Hero);
-  SDL_FreeSurface(Wall);
+  SDL_FreeSurface(Wall1);
+  SDL_FreeSurface(Ground1);
   SDL_Quit(); // Arret SDL
 
   return 0; //Fin
