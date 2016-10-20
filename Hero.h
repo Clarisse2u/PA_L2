@@ -24,6 +24,7 @@ class Hero
   void changerAngle(int i);
 
   // getteur 
+  int GetAngle(Hero h);
   string GetNom(Hero h);
   int GetPdv(Hero h);
   int GetPosx(Hero h);

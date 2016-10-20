@@ -7,7 +7,6 @@
 void HandleEvent(SDL_Event event, int &var, Hero &h)
 {
 
-
   char tmp;
   SDL_PollEvent(&event);
   switch(event.type)
@@ -30,24 +29,28 @@ void HandleEvent(SDL_Event event, int &var, Hero &h)
 	  if (h.posy>20*2){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
+	    h.changerAngle(0);
 	  }
 	  break;
 	case SDLK_DOWN:
 	  if (h.posy<20*22){
 	    tmp = 'b';
 	    h.seDeplacer(tmp);
+	    h.changerAngle(90);
 	  }
 	  break;
 	case SDLK_LEFT:
 	  if (h.posx>20*1){
 	    tmp = 'g';
 	    h.seDeplacer(tmp);
+	    h.changerAngle(180);
 	    }
 	  break;
 	case SDLK_RIGHT:
 	  if (h.posx<20*30){
 	    tmp = 'd';
 	    h.seDeplacer(tmp);
+	    h.changerAngle(270);
 	  }
 	  break;
 	}

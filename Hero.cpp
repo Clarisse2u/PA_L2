@@ -14,7 +14,7 @@ Hero::Hero(int x, int y) {
   posy = y;
   lvl = 1;
   exp = 0;
-  ang = 270;
+  angle = 270;
 }
 
 
@@ -52,7 +52,7 @@ void Hero::changerAngle(int i) {
   
 // getteur 
 
-int Hero::getAngle(Hero h) {
+int Hero::GetAngle(Hero h) {
   return h.angle;
 }
 
