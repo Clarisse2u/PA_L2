@@ -4,6 +4,8 @@
 #include "Hero.h"
 #include "Monstre.h"
 
+#define taille_case 30
+
 
 Hero::Hero(int x, int y) {
   nom = "chaussette";
@@ -21,16 +23,16 @@ Hero::Hero(int x, int y) {
 void Hero::seDeplacer(char i){
   switch (i) {
   case 'h':
-    posy-=20;
+    posy-=taille_case;
     break;
   case 'b':
-    posy+=20;
+    posy+=taille_case;
     break;
   case 'g': 
-    posx-=20;
+    posx-=taille_case;
     break;
   case 'd':
-    posx+=20;
+    posx+=taille_case;
     break;
   }
 }
