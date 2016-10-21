@@ -3,10 +3,11 @@
 #include <SDL/SDL.h>
 #include "Event.h"
 #include "Hero.h"
+#include "Map.h"
 
 #define taille_case 30
 
-void HandleEvent(SDL_Event event, int &var, Hero &h)
+void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 {
 
   char tmp;
@@ -28,28 +29,32 @@ void HandleEvent(SDL_Event event, int &var, Hero &h)
       switch (event.key.keysym.sym)
 	{
 	case SDLK_UP:
-	  if (h.posy>taille_case*1){
+	  if (m.mapCourante[(h.posy-taille_case)/taille_case][h.posx/taille_case] != 1 &&
+	       m.mapCourante[(h.posy-taille_case)/taille_case][h.posx/taille_case] != 4 ){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(0);
 	  }
 	  break;
 	case SDLK_DOWN:
-	  if (h.posy<taille_case*22){
+	  if (m.mapCourante[(h.posy+taille_case)/taille_case][h.posx/taille_case] != 1 &&
+	      m.mapCourante[(h.posy+taille_case)/taille_case][h.posx/taille_case] !=4 ){
 	    tmp = 'b';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(90);
 	  }
 	  break;
 	case SDLK_LEFT:
-	  if (h.posx>taille_case*1){
+	  if (m.mapCourante[h.posy/taille_case][(h.posx-taille_case)/taille_case] != 1 &&
+	      m.mapCourante[h.posy/taille_case][(h.posx-taille_case)/taille_case] !=4 ){
 	    tmp = 'g';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(180);
 	    }
 	  break;
 	case SDLK_RIGHT:
-	  if (h.posx<taille_case*30){
+	  if (m.mapCourante[h.posy/taille_case][(h.posx+taille_case)/taille_case] != 1 &&
+	      m.mapCourante[h.posy/taille_case][(h.posx+taille_case)/taille_case] !=4 ){
 	    tmp = 'd';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(270);

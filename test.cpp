@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
   
   while(!game)
     {
-      HandleEvent(event, game, h);
+      HandleEvent(event, game, h, m);
       
       PosHero.x = h.posx;
       PosHero.y = h.posy;

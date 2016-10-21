@@ -1,12 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Monstre.h"
+#include <string>
 
 
+Monstre::Monstre(int x, int y, string n) {
+  posx = x;
+  posy = y;
+  nom = n;
+  pdv = 2;
+  atk = 1;
+  ang = 180;
+}
 
 
-
-  void Monstre::seDeplacer(char i){}
+  void Monstre::seDeplacer(char i){
+  }
 
   void Monstre::attaquer(){}
 
