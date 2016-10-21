@@ -10,9 +10,9 @@
 int main(int argc, char *argv[])
 {
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0;;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL;
-  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos;
+  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL;
+  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD;
   SDL_Event event;
   Map m = Map();
 
@@ -25,16 +25,6 @@ int main(int argc, char *argv[])
   
   PosHero.x = h.posx;
   PosHero.y = h.posy;
-  
-  TreePosS.x = 0;
-  TreePosS.y = 0;
-  TreePosS.w = 0;
-  TreePosS.h = 0;
-
-  TreePosD.x = 0;
-  TreePosD.y = 0;
-  TreePosD.w = 0;
-  TreePosD.h = 0;
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -54,7 +44,8 @@ int main(int argc, char *argv[])
   Way1 = SDL_LoadBMP("image/chemin_30.bmp");
   Tree1 = SDL_LoadBMP("image/tree_30.bmp");
   Goodies1 = SDL_LoadBMP("image/flowers_30.bmp");
-  Goodies2= SDL_LoadBMP("image/Sol1.bmp");
+  Goodies2 = SDL_LoadBMP("image/Sol1.bmp");
+  Water1 = SDL_LoadBMP("image/lac.bmp");
 
   colorkey = SDL_MapRGB(screen->format,255,255,255);
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
@@ -103,6 +94,25 @@ int main(int argc, char *argv[])
 	    GoodiesPos.x = taille_case*j;
 	    GoodiesPos.y = taille_case*i;
 	    SDL_BlitSurface(Goodies2, NULL, screen, &GoodiesPos);
+	  }
+	  else if (m.mapCourante[i][j]==6){
+	    WaterPosD.x = taille_case*j;
+	    WaterPosD.y = taille_case*i;
+	    WaterPosS.x = taille_case*xtmp2;
+	    WaterPosS.y = taille_case*ytmp2;
+	    WaterPosS.w = taille_case;
+	    WaterPosS.h = taille_case;
+	    SDL_BlitSurface(Water1, &WaterPosS, screen, &WaterPosD);
+	    xtmp2 = xtmp2+1;
+	    if (xtmp2>6){  // on reset la valeur x
+	      xtmp2=0;
+	      if (ytmp2>=3){ // on reset y
+		ytmp2 = 0;
+	      }
+	      else{
+		ytmp2+=1;
+	      }
+	    }
 	  }
 	}
       }
