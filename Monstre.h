@@ -17,7 +17,7 @@ class Monstre
   bool vivant;
   
   // méthodes
-  Monstre(int x,int y, string nom);
+  Monstre(int x,int y, string n);
   void seDeplacer(char i);
   void attaquer();
 

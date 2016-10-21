@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
   SDL_Init(SDL_INIT_VIDEO);
   
   screen = SDL_SetVideoMode(32*taille_case+80, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
-  SDL_EnableKeyRepeat(15, 150);
+  SDL_EnableKeyRepeat(15, 50);
   SDL_WM_SetCaption("Test pour projet PA", NULL); //titre fenetre
 
   PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 24*taille_case, 32, 255, 255, 255, 0);

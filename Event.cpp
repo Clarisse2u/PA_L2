@@ -30,7 +30,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	{
 	case SDLK_UP:
 	  if (m.mapCourante[(h.posy-taille_case)/taille_case][h.posx/taille_case] != 1 &&
-	       m.mapCourante[(h.posy-taille_case)/taille_case][h.posx/taille_case] != 4 ){
+	      m.mapCourante[(h.posy-taille_case)/taille_case][h.posx/taille_case] != 4 ){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(0);
@@ -38,7 +38,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	  break;
 	case SDLK_DOWN:
 	  if (m.mapCourante[(h.posy+taille_case)/taille_case][h.posx/taille_case] != 1 &&
-	      m.mapCourante[(h.posy+taille_case)/taille_case][h.posx/taille_case] !=4 ){
+	      m.mapCourante[(h.posy+taille_case)/taille_case][h.posx/taille_case] != 4 ){
 	    tmp = 'b';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(90);
@@ -46,7 +46,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	  break;
 	case SDLK_LEFT:
 	  if (m.mapCourante[h.posy/taille_case][(h.posx-taille_case)/taille_case] != 1 &&
-	      m.mapCourante[h.posy/taille_case][(h.posx-taille_case)/taille_case] !=4 ){
+	      m.mapCourante[h.posy/taille_case][(h.posx-taille_case)/taille_case] != 4 ){
 	    tmp = 'g';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(180);
@@ -54,7 +54,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	  break;
 	case SDLK_RIGHT:
 	  if (m.mapCourante[h.posy/taille_case][(h.posx+taille_case)/taille_case] != 1 &&
-	      m.mapCourante[h.posy/taille_case][(h.posx+taille_case)/taille_case] !=4 ){
+	      m.mapCourante[h.posy/taille_case][(h.posx+taille_case)/taille_case] != 4 ){
 	    tmp = 'd';
 	    h.seDeplacer(tmp);
 	    h.changerAngle(270);
