@@ -16,7 +16,7 @@ class Monstre
   int posx, posy, pdv, atk, ang;
   bool vivant;
   
-  // méthodes
+  // methodes
   Monstre(int x,int y, string n);
   void seDeplacer(char i);
   void attaquer();
