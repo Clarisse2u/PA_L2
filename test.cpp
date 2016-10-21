@@ -10,8 +10,8 @@
 int main(int argc, char *argv[])
 {
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 1, colorkey, xtmp = 0, ytmp = 0;;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL;
+  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0;;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL;
   SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos;
   SDL_Event event;
   Map m = Map();
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
   
   screen = SDL_SetVideoMode(32*taille_case+80, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
   SDL_EnableKeyRepeat(15, 50);
-  SDL_WM_SetCaption("Test pour projet PA", NULL); //titre fenetre
+  SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
 
   PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 24*taille_case, 32, 255, 255, 255, 0);
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
   Way1 = SDL_LoadBMP("image/chemin_30.bmp");
   Tree1 = SDL_LoadBMP("image/tree_30.bmp");
   Goodies1 = SDL_LoadBMP("image/flowers_30.bmp");
+  Goodies2= SDL_LoadBMP("image/Sol1.bmp");
 
   colorkey = SDL_MapRGB(screen->format,255,255,255);
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
@@ -90,14 +91,18 @@ int main(int argc, char *argv[])
 	  }
 	  else if (m.mapCourante[i][j]==2){
 	    GoodiesPos.x = taille_case*j;
-	    GoodiesPos.y = taille_case*i;
+	    GoodiesPos.y = taille_case*i;  
 	    SDL_BlitSurface(Goodies1, NULL, screen, &GoodiesPos);
 	  }
-
 	  else if (m.mapCourante[i][j]==3){
 	    WayPos.x = taille_case*j;
 	    WayPos.y = taille_case*i;
 	    SDL_BlitSurface(Way1, NULL, screen, &WayPos);
+	  }
+	  else if (m.mapCourante[i][j]==5){
+	    GoodiesPos.x = taille_case*j;
+	    GoodiesPos.y = taille_case*i;
+	    SDL_BlitSurface(Goodies2, NULL, screen, &GoodiesPos);
 	  }
 	}
       }
