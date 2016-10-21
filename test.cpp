@@ -47,13 +47,13 @@ int main(int argc, char *argv[])
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
-  Hero = SDL_LoadBMP("heros_30.bmp");
-  //Wall1 = SDL_LoadBMP("wall1.bmp");
-  Wall2 = SDL_LoadBMP("bush_30.bmp");
-  Ground1 = SDL_LoadBMP("herbe_30.bmp");
-  Way1 = SDL_LoadBMP("chemin_30.bmp");
-  Tree1 = SDL_LoadBMP("tree_30.bmp");
-  Goodies1 = SDL_LoadBMP("flowers_30.bmp");
+  Hero = SDL_LoadBMP("image/heros_30.bmp");
+  //Wall1 = SDL_LoadBMP("image/wall1.bmp");
+  Wall2 = SDL_LoadBMP("image/bush_30.bmp");
+  Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
+  Way1 = SDL_LoadBMP("image/chemin_30.bmp");
+  Tree1 = SDL_LoadBMP("image/tree_30.bmp");
+  Goodies1 = SDL_LoadBMP("image/flowers_30.bmp");
 
   colorkey = SDL_MapRGB(screen->format,255,255,255);
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
