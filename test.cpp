@@ -10,9 +10,9 @@
 int main(int argc, char *argv[])
 {
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL;
-  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD;
+  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, affichage;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL;
+  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, CharPosS, CharPosD;
   SDL_Event event;
   Map m = Map();
 
@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
   Goodies1 = SDL_LoadBMP("image/flowers_30.bmp");
   Goodies2 = SDL_LoadBMP("image/Sol1.bmp");
   Water1 = SDL_LoadBMP("image/lac.bmp");
+  Char = SDL_LoadBMP("image/caracteres.bmp");
 
   colorkey = SDL_MapRGB(screen->format,255,255,255);
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
@@ -158,6 +159,20 @@ int main(int argc, char *argv[])
 	    }
 	  }
 	}
+      }
+
+      //Player Menu
+      affichage = 0;
+      while(!affichage){
+	
+	CharPosS.x = 5;
+	CharPosS.y = 5;
+	CharPosS.w = 20;
+	CharPosS.h = 20;
+	CharPosD.x = taille_case*32+30;
+	CharPosD.y = 50;
+	SDL_BlitSurface(Char, &CharPosS, screen, &CharPosD);
+	affichage = 1;
       }
 
       SDL_Flip(screen);
