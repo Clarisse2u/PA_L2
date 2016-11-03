@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
-  Hero = SDL_LoadBMP("image/heros_30.bmp");
+  Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
   //Wall1 = SDL_LoadBMP("image/wall1.bmp");
   Wall2 = SDL_LoadBMP("image/bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
@@ -116,7 +116,24 @@ int main(int argc, char *argv[])
 	  }
 	}
       }
-    
+      
+      // dessin du perso en fonction de l'angle 
+      int ang = h.angle;
+      switch(ang) {
+      case 0:
+	 Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
+	 break;
+      case 90:
+	 Hero = SDL_LoadBMP("image/Mage_Gauche_SD.bmp");
+	 break;
+      case 180:
+	 Hero = SDL_LoadBMP("image/Mage_Haut_SD.bmp");
+	 break;
+      case 270:
+	 Hero = SDL_LoadBMP("image/Mage_Droite_SD.bmp");
+	 break;
+      }
+
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
 
       for(int i=0; i<24; i++){

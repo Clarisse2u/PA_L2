@@ -37,22 +37,22 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	  if ( h.posy/taille_case-1 > -1 && depH != 1 && depH != 4 ){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(0);
-	    //  printf("%d\n", m.mapCourante[(h.posy-taille_case)/taille_case][(h.posx)/taille_case]);
+	    h.changerAngle(180);
+	    // printf("%d\n", h.angle);
 	  }
 	  break;
 	case SDLK_DOWN:
 	  if ( h.posy/taille_case+1 < 24  && depB != 1 && depB != 4 ){
 	    tmp = 'b';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(90);
+	    h.changerAngle(0);
 	  }
 	  break;
 	case SDLK_LEFT:
 	  if ( h.posx/taille_case-1 > -1 && depG != 1 && depG != 4 ){
 	    tmp = 'g';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(180);
+	    h.changerAngle(90);
 	    }
 	  break;
 	case SDLK_RIGHT:
