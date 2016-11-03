@@ -99,3 +99,11 @@ void Hero::SetPosy(int nPosy) {
 void Hero::SetVivant(bool nVivant) {
   vivant = nVivant;
 }
+
+void Hero::Attaque(bool b) {
+  attaque = b;
+}
+
+void Hero::EstAttaque(bool b) {
+  estAttaque = b;
+}

@@ -3,12 +3,16 @@
 #include <SDL/SDL.h>
 #include "Event.h"
 #include "Hero.h"
+#include "Monstre.h"
 #include "Map.h"
+#include <vector>
 
 #define taille_case 30
 
 int main(int argc, char *argv[])
 {
+  Monstre slime1 = Monstre("Slime", 2, 1, 24*taille_case/10, 32*taille_case/10);
+  vector <Monstre> tabMonstre(1,slime1);
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, affichage;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL;
@@ -57,7 +61,7 @@ int main(int argc, char *argv[])
   
   while(!game)
     {
-      HandleEvent(event, game, h, m);
+      HandleEvent(event, game, h, m, tabMonstre);
       
       PosHero.x = h.posx;
       PosHero.y = h.posy;
@@ -136,6 +140,10 @@ int main(int argc, char *argv[])
       }
 
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
+      if (h.attaque) {
+	Hero = SDL_LoadBMP("image/flowers_30.bmp");
+	SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
+      }
 
       for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){
