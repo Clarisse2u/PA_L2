@@ -4,12 +4,12 @@
 #include <string>
 
 
-Monstre::Monstre(int x, int y, string n) {
+Monstre::Monstre(string n, int p, int a,  int x, int y) {
   posx = x;
   posy = y;
   nom = n;
-  pdv = 2;
-  atk = 1;
+  pdv = p;
+  atk = a;
   ang = 180;
 }
 

@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
+#include <vector>
 #include "Event.h"
 #include "Hero.h"
+#include "Monstre.h"
 #include "Map.h"
 
 #define taille_case 30
 
-void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
+void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, vector<Monstre> tabMonstre)
 {
 
   char tmp;
@@ -27,6 +29,9 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	{
 	case SDLK_ESCAPE:
 	  var = 1;
+	  break;
+	case SDLK_SPACE:
+	  h.Attaque(false);
 	  break;
 	}
       break;
@@ -62,9 +67,43 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
 	    h.seDeplacer(tmp);
 	  }
 	  break;
+
 	case SDLK_SPACE:
+	  h.Attaque(true);
+	  int t = tabMonstre.size();
+	  for (int i = 0; i < t; i++)  {
+	    // position monstre et hero
+	    int mx =  tabMonstre[i].posx;
+	    int my =  tabMonstre[i].posy;
+	    int hx =  tabMonstre[i].posx;
+	    int hy =  tabMonstre[i].posy;
+	  switch (h.angle) {
+	  case 0:
+	    if ( mx == hx && my == (hy+taille_case) ) {
+	      h.attaquer(tabMonstre[i]);
+	    }
+	    break;
+	  case 90:
+	    if ( mx == hx-taille_case && my == hy) {
+	      h.attaquer(tabMonstre[i]);
+	    }
+	    break;
+	  case 180:
+	    if ( mx == hx && my == (hy-taille_case) ) {
+	      h.attaquer(tabMonstre[i]);
+	    }
+	    break;
+	  case 270:
+	      if ( mx == hx+taille_case && my == hy) {
+	      h.attaquer(tabMonstre[i]);
+	    }
+	    break;
+
+	  }
+	  
 	  break;
 	}
       break;
     }
 }
+ }

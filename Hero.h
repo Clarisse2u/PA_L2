@@ -15,13 +15,14 @@ class Hero
   // attributs
   string nom;
   int posx, posy, pdv, exp, lvl, atk, angle;
-  bool vivant;
+  bool vivant, attaque, estAttaque;
   
   // méthodes
   Hero(int x,int y);
   void seDeplacer(char i);
   void attaquer(Monstre m);
   void changerAngle(int i);
+  
 
   // getteur 
   int GetAngle(Hero h);
@@ -37,6 +38,8 @@ class Hero
   void SetPosx(int nPosx);
   void SetPosy(int nPosy);
   void SetVivant(bool nVivant);
+  void Attaque(bool b);
+  void EstAttaque(bool b);
 
 };
 #endif
