@@ -16,7 +16,7 @@ Hero::Hero(int x, int y) {
   posy = y;
   lvl = 1;
   exp = 0;
-  angle = 270;
+  angle = 0;
 }
 
 
