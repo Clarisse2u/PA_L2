@@ -34,33 +34,35 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m)
       switch (event.key.keysym.sym)
 	{
 	case SDLK_UP:
-	  if ( h.posy/taille_case-1 > -1 && depH != 1 && depH != 4 ){
+	   h.changerAngle(180);
+	  if ( h.posy/taille_case-1 > -1 && depH != 1 && depH != 4 && depH != 6){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(180);
 	    // printf("%d\n", h.angle);
 	  }
 	  break;
 	case SDLK_DOWN:
-	  if ( h.posy/taille_case+1 < 24  && depB != 1 && depB != 4 ){
+	   h.changerAngle(0);
+	  if ( h.posy/taille_case+1 < 24  && depB != 1 && depB != 4 && depB != 6){
 	    tmp = 'b';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(0);
 	  }
 	  break;
 	case SDLK_LEFT:
-	  if ( h.posx/taille_case-1 > -1 && depG != 1 && depG != 4 ){
+	  h.changerAngle(90);
+	  if ( h.posx/taille_case-1 > -1 && depG != 1 && depG != 4 && depG != 6){
 	    tmp = 'g';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(90);
 	    }
 	  break;
 	case SDLK_RIGHT:
-	  if (  h.posx/taille_case+1 < 32 && depD != 1 && depD != 4 ){
+	  h.changerAngle(270);
+	  if (  h.posx/taille_case+1 < 32 && depD != 1 && depD != 4 && depD != 6){
 	    tmp = 'd';
 	    h.seDeplacer(tmp);
-	    h.changerAngle(270);
 	  }
+	  break;
+	case SDLK_SPACE:
 	  break;
 	}
       break;
