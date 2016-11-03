@@ -38,16 +38,16 @@ int main(int argc, char *argv[])
 
   SDL_Init(SDL_INIT_VIDEO);
   
-  screen = SDL_SetVideoMode(32*taille_case+80, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
+  screen = SDL_SetVideoMode(32*taille_case+160, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
   SDL_EnableKeyRepeat(15, 50);
   SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
 
-  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 24*taille_case, 32, 255, 255, 255, 0);
+  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 160, 24*taille_case, 32, 255, 255, 255, 0);
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
-  Hero = SDL_LoadBMP("image/heros_30.bmp");
+  Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
   //Wall1 = SDL_LoadBMP("image/wall1.bmp");
   Wall2 = SDL_LoadBMP("image/bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
@@ -106,7 +106,24 @@ int main(int argc, char *argv[])
 	  }
 	}
       }
-    
+      
+      // dessin du perso en fonction de l'angle 
+      int ang = h.angle;
+      switch(ang) {
+      case 0:
+	 Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
+	 break;
+      case 90:
+	 Hero = SDL_LoadBMP("image/Mage_Gauche_SD.bmp");
+	 break;
+      case 180:
+	 Hero = SDL_LoadBMP("image/Mage_Haut_SD.bmp");
+	 break;
+      case 270:
+	 Hero = SDL_LoadBMP("image/Mage_Droite_SD.bmp");
+	 break;
+      }
+
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
 
       for(int i=0; i<24; i++){
