@@ -28,11 +28,11 @@ int main(int argc, char *argv[])
 
   SDL_Init(SDL_INIT_VIDEO);
   
-  screen = SDL_SetVideoMode(32*taille_case+80, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
+  screen = SDL_SetVideoMode(32*taille_case+160, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
   SDL_EnableKeyRepeat(15, 50);
   SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
 
-  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 80, 24*taille_case, 32, 255, 255, 255, 0);
+  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 160, 24*taille_case, 32, 255, 255, 255, 0);
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
