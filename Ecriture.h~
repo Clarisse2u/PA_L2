@@ -1,0 +1,8 @@
+#include <SDL/SDL.h>
+
+#ifndef ecriture_H
+#define ecriture_H
+
+void Ecrire();
+
+#endif

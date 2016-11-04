@@ -14,9 +14,13 @@ int main(int argc, char *argv[])
   Monstre slime1 = Monstre("Slime", 2, 1, 24*taille_case/10, 32*taille_case/10);
   vector <Monstre> tabMonstre(1,slime1);
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, affichage;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL, *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL;
-  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, CharPosS, CharPosD;
+  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
+    int AffI, cpt = 1;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
+  SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
+  SDL_Surface *Pdv = NULL;
+  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
+  SDL_Rect CharPosS, CharPosD, PdvPos;
   SDL_Event event;
   Map m = Map();
 
@@ -32,11 +36,11 @@ int main(int argc, char *argv[])
 
   SDL_Init(SDL_INIT_VIDEO);
   
-  screen = SDL_SetVideoMode(32*taille_case+160, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
+  screen = SDL_SetVideoMode(32*taille_case+180, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
   SDL_EnableKeyRepeat(15, 50);
   SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
 
-  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 160, 24*taille_case, 32, 255, 255, 255, 0);
+  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 180, 24*taille_case, 32, 255, 255, 255, 0);
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
@@ -51,13 +55,11 @@ int main(int argc, char *argv[])
   Goodies2 = SDL_LoadBMP("image/Sol1.bmp");
   Water1 = SDL_LoadBMP("image/lac.bmp");
   Char = SDL_LoadBMP("image/caracteres.bmp");
+  RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
+  Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
 
   colorkey = SDL_MapRGB(screen->format,255,255,255);
   SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
-
-  SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
-      
-  SDL_Flip(screen); //actualiser l'ecran
   
   while(!game)
     {
@@ -170,18 +172,71 @@ int main(int argc, char *argv[])
       }
 
       //Player Menu
-      affichage = 0;
-      while(!affichage){
+      AffichageMenu = 0;
+      //Affichage lettres
+      while (!AffichageMenu) {
+	switch(AffI){
+	case 1:
+	  switch(cpt){
+	  case 1:
+	    Afftmpx = 1;
+	    Afftmpy = 3;
+	    break;
+	  case 2:
+	    Afftmpx = 4;
+	    Afftmpy = 0;
+	    break;
+	  case 3:
+	    Afftmpx = 0;
+	    Afftmpy = 3;
+	    break;
+	  case 4:
+	    Afftmpx = 1;
+	    Afftmpy = 3;
+	    break;
+	  }
+	  break;
+	case 2:
+	  switch(cpt){
+	  case 1:
+	    Afftmpx = 5;
+	    Afftmpy = 1;
+	    break;
+	  case 2:
+	    Afftmpx = 3;
+	    Afftmpy = 3;
+	    break;
+	  case 3:
+	    Afftmpx = 5;
+	    Afftmpy = 1;
+	    AffichageMenu = 1;
+	    break;
+	  }
+	}
 	
-	CharPosS.x = 5;
-	CharPosS.y = 5;
+	cpt++;
+	if (cpt==5) cpt=0;
+	AffI++;
+	if (AffI== 3) AffI=1;
+
+	CharPosS.x = 5+30*Afftmpx;
+	CharPosS.y = 5+27*Afftmpy;
 	CharPosS.w = 20;
 	CharPosS.h = 20;
-	CharPosD.x = taille_case*32+30;
-	CharPosD.y = 50;
+	CharPosD.x = taille_case*32+30+cpt*20;
+	CharPosD.y = 50*AffI;
 	SDL_BlitSurface(Char, &CharPosS, screen, &CharPosD);
-	affichage = 1;
       }
+
+      //Affichage barre de vie
+      
+      BdvPos.x = taille_case*32+10;
+      BdvPos.y = 100;
+      SDL_BlitSurface(RecBdv, NULL, screen, &BdvPos);
+
+      PdvPos.x = taille_case*32+11;
+      PdvPos.y = 101;
+      SDL_BlitSurface(Pdv, NULL, screen, &PdvPos);
 
       SDL_Flip(screen);
     }
@@ -192,6 +247,8 @@ int main(int argc, char *argv[])
   SDL_FreeSurface(Ground1);
   SDL_FreeSurface(Tree1);
   SDL_FreeSurface(Goodies1);
+  SDL_FreeSurface(Water1);
+  SDL_FreeSurface(Char);
   SDL_Quit(); // Arret SDL
 
   return 0; //Fin

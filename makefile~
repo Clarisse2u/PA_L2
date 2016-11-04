@@ -1,0 +1,6 @@
+Projet_PA:	test.c
+		g++ *.cpp `sdl-config --cflags --libs` -o test -g
+
+
+clean:
+	rm test
