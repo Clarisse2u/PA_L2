@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
       for(int i(0); i<tabMonstre.size(); ++i)  {
 	 
 	if ( tabMonstre[i].nom == "slime") {
-	  switch(ang) {
+	  switch(tabMonstre[i].ang) {
 	  case 0:
 	    Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
 	    break;
@@ -174,7 +174,7 @@ int main(int argc, char *argv[])
 	  }
 	}
 	else if ( tabMonstre[i].nom == "dragon") {
-	  switch(ang) {
+	  switch(tabMonstre[i].ang) {
 	  case 0:
 	    Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
 	    break;
@@ -190,7 +190,7 @@ int main(int argc, char *argv[])
 	  }
 	}
 	else if ( tabMonstre[i].nom == "diablotin") {
-	  switch(ang) {
+	  switch(tabMonstre[i].ang) {
 	  case 0:
 	    Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
 	    break;
@@ -207,10 +207,8 @@ int main(int argc, char *argv[])
 	}
 	PosMonstre.x = tabMonstre[i].posx;
 	PosMonstre.y = tabMonstre[i].posy;
-	printf("%d", tabMonstre[i].posy);
 	 
 	SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
-	
       }
       
      
