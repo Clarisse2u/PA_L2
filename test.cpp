@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
   vector <Monstre> tabMonstre(1,slime1);
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 1, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
-  int AffI, cpt = 1;
+  int AffI = 0, cpt = 1;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL;
