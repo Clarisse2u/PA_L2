@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
   Monstre slime1 = Monstre("Slime", 2, 1, 24*taille_case/10, 32*taille_case/10);
   vector <Monstre> tabMonstre(1,slime1);
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
-    int AffI, cpt = 1;
+  int game = 0, MapNumber = 1, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
+  int AffI, cpt = 1;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL;
@@ -72,9 +72,9 @@ int main(int argc, char *argv[])
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
       SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
       
-      
+      //chargement de la map
       m.returnMap(MapNumber);
-      
+
       for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){
 	  if(m.mapCourante[i][j]==0){
@@ -120,6 +120,11 @@ int main(int argc, char *argv[])
 		ytmp2+=1;
 	      }
 	    }
+	  }
+	  else if (m.mapCourante[i][j]==9){
+	    WayPos.x = taille_case*j;
+	    WayPos.y = taille_case*i;
+	    SDL_BlitSurface(Way1, NULL, screen, &WayPos);
 	  }
 	}
       }
@@ -193,10 +198,11 @@ int main(int argc, char *argv[])
 	  case 4:
 	    Afftmpx = 1;
 	    Afftmpy = 3;
+	    AffichageMenu=1;
 	    break;
 	  }
 	  break;
-	case 2:
+	  /*case 2:
 	  switch(cpt){
 	  case 1:
 	    Afftmpx = 5;
@@ -211,7 +217,7 @@ int main(int argc, char *argv[])
 	    Afftmpy = 1;
 	    AffichageMenu = 1;
 	    break;
-	  }
+	    }*/
 	}
 	
 	cpt++;
@@ -219,24 +225,46 @@ int main(int argc, char *argv[])
 	AffI++;
 	if (AffI== 3) AffI=1;
 
-	CharPosS.x = 5+30*Afftmpx;
-	CharPosS.y = 5+27*Afftmpy;
-	CharPosS.w = 20;
-	CharPosS.h = 20;
-	CharPosD.x = taille_case*32+30+cpt*20;
-	CharPosD.y = 50*AffI;
+	CharPosS.x = 30*Afftmpx;
+	CharPosS.y = 30*Afftmpy;
+	CharPosS.w = 30;
+	CharPosS.h = 30;
+	CharPosD.x = taille_case*32+30+cpt*30;
+	CharPosD.y = 50;
 	SDL_BlitSurface(Char, &CharPosS, screen, &CharPosD);
       }
 
       //Affichage barre de vie
       
       BdvPos.x = taille_case*32+10;
-      BdvPos.y = 100;
+      BdvPos.y = 300;
       SDL_BlitSurface(RecBdv, NULL, screen, &BdvPos);
 
       PdvPos.x = taille_case*32+11;
-      PdvPos.y = 101;
+      PdvPos.y = 301;
       SDL_BlitSurface(Pdv, NULL, screen, &PdvPos);
+
+      //changement de map
+
+      if(m.mapCourante[h.posy/taille_case][h.posx/taille_case]==9){
+	if (MapNumber == 1 && h.posx == taille_case*31){
+	  MapNumber=2;
+	  h.SetPosx(taille_case*1);
+	}
+	else if (MapNumber == 2 && h.posx == taille_case*0){
+	  MapNumber=1;
+	  h.SetPosx(taille_case*30);
+	}
+	else if (MapNumber == 2 && h.posy == taille_case*0){
+	  MapNumber=5;
+	  h.SetPosy(taille_case*22);
+	}
+	else if (MapNumber == 5 && h.posy == taille_case*23){
+	  MapNumber=2;
+	  h.SetPosy(taille_case*1);
+	}
+      }
+
 
       SDL_Flip(screen);
     }
@@ -249,6 +277,8 @@ int main(int argc, char *argv[])
   SDL_FreeSurface(Goodies1);
   SDL_FreeSurface(Water1);
   SDL_FreeSurface(Char);
+  SDL_FreeSurface(RecBdv);
+  SDL_FreeSurface(Pdv);
   SDL_Quit(); // Arret SDL
 
   return 0; //Fin
