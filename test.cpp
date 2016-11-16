@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
   Hero h = Hero(24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 1, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
   int AffI, cpt = 1;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL;
-  SDL_Rect PosMenu, PosHero, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
+  SDL_Rect PosMenu, PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
   SDL_Rect CharPosS, CharPosD, PdvPos;
   SDL_Event event;
   Map m = Map();
@@ -151,6 +151,60 @@ int main(int argc, char *argv[])
 	Hero = SDL_LoadBMP("image/flowers_30.bmp");
 	SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
       }
+      
+
+       for(vector<int>::iterator i = vect.begin(); i != vect.end();++i){
+	 
+	 switch tabMonstre[i].nom {
+	   case 'slime':
+	      switch(ang) {
+	      case 0:
+		Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
+		break;
+	      case 90:
+		Monstre = SDL_LoadBMP("image/Slime_Gauche_HD.bmp");
+		break;
+	      case 180:
+		Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
+		break;
+	      case 270:
+		Monstre = SDL_LoadBMP("image/Slime_Droite_HD.bmp");
+		break;
+	      }
+	    
+	   case 'dragon':
+	     switch(ang) {
+	      case 0:
+		Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
+		break;
+	      case 90:
+		Monstre = SDL_LoadBMP("image/Dragon_Gauche_HD.bmp");
+		break;
+	      case 180:
+		Monstre = SDL_LoadBMP("image/Dragon_Haut_HD.bmp");
+		break;
+	      case 270:
+		Monstre = SDL_LoadBMP("image/Dragon_Droite_HD.bmp");
+		break;
+	      }
+	   case 'diablotin':
+	     switch(ang) {
+	      case 0:
+		Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
+		break;
+	      case 90:
+		Monstre = SDL_LoadBMP("image/Diablotin_Gauche_HD.bmp");
+		break;
+	      case 180:
+		Monstre = SDL_LoadBMP("image/Diablotin_Haut_HD.bmp");
+		break;
+	      case 270:
+		Monstre = SDL_LoadBMP("image/Diablotin_Droite_HD.bmp");
+		break;
+	      }
+	 }
+	 SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
+
 
       for(int i=0; i<24; i++){
         for(int j=0; j<32; j++){

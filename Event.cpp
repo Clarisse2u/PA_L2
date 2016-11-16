@@ -98,7 +98,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, vector<Monstre> tabM
 	      h.attaquer(tabMonstre[i]);
 	    }
 	    break;
-
+	    
 	  }
 	  
 	  break;
