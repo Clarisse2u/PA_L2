@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
   Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
-  Monstre =  SDL_LoadBMP("image/Slime_Bas_HD.bmp");
   //Wall1 = SDL_LoadBMP("image/wall1.bmp");
   Wall2 = SDL_LoadBMP("image/bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
