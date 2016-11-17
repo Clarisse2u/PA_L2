@@ -61,8 +61,8 @@ int main(int argc, char *argv[])
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
 
-  colorkey = SDL_MapRGB(screen->format,255,255,255);
-  SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
+  colorkey = SDL_MapRGB(screen->format,255,0,255);
+  SDL_SetColorKey(Monstre, 0, colorkey);
   
   while(!game)
     {
