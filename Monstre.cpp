@@ -68,47 +68,43 @@ if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) { // perso vers le bas
 		 */
 	switch (pos) {
 
-	  int i = m.estMur([this.getPosx()],[this.getPosy()-1]);
-		case 0: 
-			if ( i == 0 || i == 3  || i == 2) {
-				if (pj.getPosx() == this.getPosx() && pj.getPosy() == this.getPosy()-1 ) {
-
+	  
+		case 1: 
+		  if ( m.estMur(posx, posy-1)) {
+				if (h.GetPosx() == posx && h.GetPosy() == posy-1 ) {
 				}
 				else {
-					this.posy -= 1;//deplacement vers le haut
-				}
-			}
-			break;
-
-		case 1:  
-			if ((m.getTabMur()[this.getPosx()+1][this.getPosy()] == false)&& (!MoteurGraphique.getJ().presenceMonstre(this.getPosx()+1, this.getPosy()))) {
-				if ( pj.getPosx() == this.getPosx()+1 && pj.getPosy() == this.getPosy() ) {
-
-				}
-				else {
-					this.posx += 1;//deplacement vers la droite
+					posy -= 1;//deplacement vers le haut
 				}
 			}
 			break;
 
 		case 2:  
-			if ((m.getTabMur()[this.getPosx()][this.getPosy()+1] == false)&& (!MoteurGraphique.getJ().presenceMonstre(this.getPosx(), this.getPosy()+1))) {
-				if ( pj.getPosx() == this.getPosx() && pj.getPosy() == this.getPosy()+1 ) {
+		  if (m.estMur(posx+1,posy)) {
+		      if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) {
+		      }
+		      else {
+			posx += 1;//deplacement vers la droite
+		      }
+		    }
+			break;
 
+		case 3:  
+		  if (m.estMur(posx, posy+1)) {
+				if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) {
 				}
 				else {
-					this.posy += 1;//deplacement vers le bas
+					posy += 1;//deplacement vers le bas
 				}
 			}
 			break;
 
-		case 3:  
-			if (!(m.getTabMur()[this.getPosx()-1][this.getPosy()])&& (!MoteurGraphique.getJ().presenceMonstre(this.getPosx()-1, this.getPosy()-1))) {
-				if ( pj.getPosx() == this.getPosx()-1 && pj.getPosy() == this.getPosy() ) {
-
+		case 4:  
+		      if (m.estMur(posx-1, posy)) {
+				if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) {
 				}
 				else {
-					this.posx -= 1;//deplacement vers la gauche
+					posx -= 1;//deplacement vers la gauche
 				}
 			}
 			break; 

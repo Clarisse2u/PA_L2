@@ -171,3 +171,14 @@ void Map::returnMap (int i) {
       }
     }
 }
+
+  bool Map::estMur(int x, int y) {
+    int i = mapCourante[x][y];
+    if (i == 0 || i == 2 || i == 3 || i == 5) {
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+
