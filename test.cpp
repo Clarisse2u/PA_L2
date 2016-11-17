@@ -14,7 +14,7 @@
 int main(int argc, char *argv[])
 {
   std::string n = "slime";
-  Monstre slime1 = Monstre(n, 2, 1, 24*taille_case/2, 32*taille_case/2);
+  Monstre slime1 = Monstre(n, 2, 1, 24*taille_case/4, 32*taille_case/4);
   std::vector <Monstre> tabMonstre(1,slime1);
   Hero h = Hero(n,1,2,24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 1, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
@@ -162,6 +162,7 @@ int main(int argc, char *argv[])
       // for(vector<Monstre>::iterator i = tabMonstre.begin(); i != tabMonstre.end();++i){
 
       for(int i(0); i<tabMonstre.size(); ++i)  {
+	tabMonstre[i].seDeplacer(h, m);
 	 
 	if ( tabMonstre[i].nom == "slime") {
 	  switch(tabMonstre[i].angle) {

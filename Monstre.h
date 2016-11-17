@@ -13,11 +13,12 @@
 class Monstre : public Personnage
 {
  public:
-  
+  int it;
    Monstre(std::string s, int p, int a, int x,int y);
   // methodes
-  void seDeplacer(Hero h, Map m);
+  void seDeplacer(Personnage h, Map m);
+  void deplacementAlea(Personnage h, Map m);
 
- 
+
 };
 #endif

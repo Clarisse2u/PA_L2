@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Map.h"
 
+#define taille_case 30
 
 /* Legende 
  * 0 = sol
@@ -173,7 +174,7 @@ void Map::returnMap (int i) {
 }
 
   bool Map::estMur(int x, int y) {
-    int i = mapCourante[x][y];
+    int i = mapCourante[x/taille_case][y/taille_case];
     if (i == 0 || i == 2 || i == 3 || i == 5) {
       return true;
     } else { 
