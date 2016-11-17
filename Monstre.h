@@ -2,38 +2,22 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include "Personnage.h"
+#include "Hero.h"
+#include "Map.h"
 
 #ifndef Monstre_H
 #define Monstre_H
 
-using namespace std;
 
-class Monstre
+class Monstre : public Personnage
 {
  public:
-  // attributs
-  string nom;
-  int posx, posy, pdv, atk, ang;
-  bool vivant;
   
+   Monstre(std::string s, int p, int a, int x,int y);
   // methodes
-  Monstre(string n, int p, int a, int x,int y);
-  void seDeplacer(char i);
-  void attaquer();
+  void seDeplacer(Hero h, Map m);
 
-  // getteur 
-  string GetNom();
-  int GetPdv();
-  int GetPosx();
-  int GetPosy();
-  bool GetMort();
-
-  // setteur
-  void SetNom(string nouveauNom);
-  void SetPdv(int nPdv);
-  void SetPosx(int nPosx);
-  void SetPosy(int nPosy);
-  void SetVivant(bool nVivant);
-
+ 
 };
 #endif

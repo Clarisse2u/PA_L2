@@ -3,13 +3,14 @@
 #include <SDL/SDL.h>
 #include <vector>
 #include "Event.h"
+#include "Personnage.h"
 #include "Hero.h"
 #include "Monstre.h"
 #include "Map.h"
 
 #define taille_case 30
 
-void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, vector<Monstre> tabMonstre)
+void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre> tabMonstre)
 {
 
   char tmp;
@@ -39,7 +40,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, vector<Monstre> tabM
       switch (event.key.keysym.sym)
 	{
 	case SDLK_UP:
-	   h.changerAngle(180);
+	   h.SetAngle(180);
 	  if ( h.posy/taille_case-1 > -1 && depH != 1 && depH != 4 && depH != 6){
 	    tmp = 'h';
 	    h.seDeplacer(tmp);
@@ -47,21 +48,21 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, vector<Monstre> tabM
 	  }
 	  break;
 	case SDLK_DOWN:
-	   h.changerAngle(0);
+	   h.SetAngle(0);
 	  if ( h.posy/taille_case+1 < 24  && depB != 1 && depB != 4 && depB != 6){
 	    tmp = 'b';
 	    h.seDeplacer(tmp);
 	  }
 	  break;
 	case SDLK_LEFT:
-	  h.changerAngle(90);
+	  h.SetAngle(90);
 	  if ( h.posx/taille_case-1 > -1 && depG != 1 && depG != 4 && depG != 6){
 	    tmp = 'g';
 	    h.seDeplacer(tmp);
 	    }
 	  break;
 	case SDLK_RIGHT:
-	  h.changerAngle(270);
+	  h.SetAngle(270);
 	  if (  h.posx/taille_case+1 < 32 && depD != 1 && depD != 4 && depD != 6){
 	    tmp = 'd';
 	    h.seDeplacer(tmp);

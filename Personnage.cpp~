@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include "Personnage.h"
+
+
+
+Personnage::Personnage(string n, int p, int a,int x, int y) {
+  nom = n;
+  pdv = p;
+  atk = a;
+  vivant = true;
+  posx = x;
+  posy = y;
+  ang = 0;
+}
+
+void Personnage::attaquer(Personnage p){
+  p.SetPdv(p.GetPdv()-atk);
+}
+
+bool Personnage::estVivant(Personnage h) {
+  if (h.pdv < 1) {
+    h.vivant = false;
+  }
+  return h.vivant;
+}
+  
+void Personnage::Attaque(bool b) {
+  attaque = b;
+}
+
+void Personnage::EstAttaque(bool b) {
+  estAttaque = b;
+}
+  
+  // getteur 
+
+  string Personnage::GetNom() {
+    return nom;
+  }
+
+  int Personnage::GetPdv() {
+    return pdv;
+  }
+
+  int Personnage::GetPosx() {
+    return posx;
+  }
+
+  int Personnage::GetPosy() {
+    return posy;
+  }
+
+  bool Personnage::GetMort() {
+    return vivant;
+  }
+
+int Personnage::GetAngle() {
+  return ang;
+}
+ 
+
+  // setteur
+  
+  void Personnage::SetNom(string nouveauNom) {
+    nom = nouveauNom;
+  }
+
+  void Personnage::SetPdv(int nPdv) {
+    pdv = nPdv;
+  }
+
+  void Personnage::SetPosx(int nPosx) {
+    posx = nPosx;
+  }
+
+  void Personnage::SetPosy(int nPosy) {
+    posy = nPosy;
+  }
+
+  void Personnage::SetVivant(bool nVivant) {
+    vivant = nVivant;
+  }
+
+void Personnage::SetAngle(int angle) {
+  ang = angle;
+}
