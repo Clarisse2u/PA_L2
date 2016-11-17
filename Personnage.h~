@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string>
+
+#ifndef Personnage_H
+#define Personnage_H
+
+using namespace std;
+
+class Personnage {
+
+public:
+  // attributs
+  string nom;
+  int posx, posy, pdv, atk, ang;
+  bool vivant, attaque, estAttaque;
+
+ // methodes
+  Personnage(string n, int p, int a, int x,int y);
+  virtual void seDeplacer();
+  void attaquer(Personnage p);
+  void Attaque(bool b);
+  void EstAttaque(bool b);
+
+  // getteur 
+  string GetNom();
+  int GetPdv();
+  int GetPosx();
+  int GetPosy();
+  bool GetMort();
+  int GetAngle();
+
+  // setteur
+  void SetNom(string nouveauNom);
+  void SetPdv(int nPdv);
+  void SetPosx(int nPosx);
+  void SetPosy(int nPosy);
+  void SetVivant(bool nVivant);
+  void SetAngle(int angle);
+
+  };
+#endif
