@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
   SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
   Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
+  Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
   //Wall1 = SDL_LoadBMP("image/wall1.bmp");
   Wall2 = SDL_LoadBMP("image/bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
@@ -58,9 +59,13 @@ int main(int argc, char *argv[])
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
 
-  colorkey = SDL_MapRGB(screen->format,255,0,255);
-  SDL_SetColorKey(Monstre, 0, colorkey);
-  
+  Monstre->format->Amask = 0xFF000000;
+  Monstre->format->Ashift = 24;
+  SDL_SetAlpha(Monstre, 0, 0);
+  colorkey = SDL_MapRGB(Monstre->format,255,0,255);
+  SDL_SetColorKey(Monstre, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
+  SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
+
   while(!game)
     {
       HandleEvent(event, game, h, m, tabMonstre);
