@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
   Monstre slime1 = Monstre(n, 2, 1, 24*taille_case/2, 32*taille_case/2);
   std::vector <Monstre> tabMonstre(1,slime1);
   Hero h = Hero(n,1,2,24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 1, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
+  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
   int AffI = 0, cpt = 1;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
-  SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
-  SDL_Surface *Pdv = NULL;
+  SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
+  SDL_Surface *Pdv = NULL, *Ground2 = NULL;
   SDL_Rect PosMenu, PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
   SDL_Rect CharPosS, CharPosD, PdvPos;
   SDL_Event event;
@@ -53,14 +53,17 @@ int main(int argc, char *argv[])
   //Wall1 = SDL_LoadBMP("image/wall1.bmp");
   Wall2 = SDL_LoadBMP("image/Bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
+  Ground2 = SDL_LoadBMP("image/terre_30.bmp");
   Way1 = SDL_LoadBMP("image/chemin_30.bmp");
   Tree1 = SDL_LoadBMP("image/tree_30.bmp");
   Goodies1 = SDL_LoadBMP("image/flowers_30.bmp");
   Goodies2 = SDL_LoadBMP("image/Sol1.bmp");
+  Goodies3 = SDL_LoadBMP("image/Sol2.bmp");
   Water1 = SDL_LoadBMP("image/lac.bmp");
   Char = SDL_LoadBMP("image/caracteres.bmp");
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
+
 
   
   colorkey = SDL_MapRGB(Monstre->format,255,0,255);
@@ -86,7 +89,12 @@ int main(int argc, char *argv[])
 	  if(m.mapCourante[i][j]==0){
 	    GroundPos.x = taille_case*j;
 	    GroundPos.y = taille_case*i;
-	    SDL_BlitSurface(Ground1, NULL, screen, &GroundPos);
+	    if(MapNumber == 3 ){
+	      SDL_BlitSurface(Ground2, NULL, screen, &GroundPos);
+	    }
+	    else{
+	      SDL_BlitSurface(Ground1, NULL, screen, &GroundPos);
+	    }
 	  }
 	  else if (m.mapCourante[i][j]==1){
 	    WallPos.x = taille_case*j;
@@ -106,7 +114,12 @@ int main(int argc, char *argv[])
 	  else if (m.mapCourante[i][j]==5){
 	    GoodiesPos.x = taille_case*j;
 	    GoodiesPos.y = taille_case*i;
-	    SDL_BlitSurface(Goodies2, NULL, screen, &GoodiesPos);
+	    if(MapNumber == 2){
+	      SDL_BlitSurface(Goodies2, NULL, screen, &GoodiesPos);
+	    }
+	    else if(MapNumber == 3){
+	      SDL_BlitSurface(Goodies3, NULL, screen, &GoodiesPos);
+	    }
 	  }
 	  else if (m.mapCourante[i][j]==6){
 	    WaterPosD.x = taille_case*j;
