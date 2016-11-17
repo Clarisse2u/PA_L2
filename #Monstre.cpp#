@@ -66,11 +66,11 @@ if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) { // perso vers le bas
 		/**
 		 * gere la collision
 		 */
-/*	switch (pos) {
+	switch (pos) {
 
-
+	  int i = m.estMur([this.getPosx()],[this.getPosy()-1];
 		case 0: 
-			if ((m.getTabMur()[this.getPosx()][this.getPosy()-1] == false)&& (!MoteurGraphique.getJ().presenceMonstre(this.getPosx(), this.getPosy()-1))) {
+			if ( i == 0 || i == 3  || i == 2) {
 				if (pj.getPosx() == this.getPosx() && pj.getPosy() == this.getPosy()-1 ) {
 
 				}
@@ -112,7 +112,7 @@ if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) { // perso vers le bas
 				}
 			}
 			break; 
-			}*/
+			}
 		}
 
  
