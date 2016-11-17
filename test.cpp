@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
   Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
   //Wall1 = SDL_LoadBMP("image/wall1.bmp");
-  Wall2 = SDL_LoadBMP("image/bush_30.bmp");
+  Wall2 = SDL_LoadBMP("image/Bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
   Way1 = SDL_LoadBMP("image/chemin_30.bmp");
   Tree1 = SDL_LoadBMP("image/tree_30.bmp");
@@ -62,12 +62,10 @@ int main(int argc, char *argv[])
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
 
-  Monstre->format->Amask = 0xFF000000;
-  Monstre->format->Ashift = 24;
-  SDL_SetAlpha(Monstre, 0, 0);
+  
   colorkey = SDL_MapRGB(Monstre->format,255,0,255);
   SDL_SetColorKey(Monstre, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
-  SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
+  //SDL_SetColorKey(Hero, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
 
   while(!game)
     {
@@ -328,6 +326,14 @@ int main(int argc, char *argv[])
 	else if (MapNumber == 2 && h.posy == taille_case*0){
 	  MapNumber=5;
 	  h.SetPosy(taille_case*22);
+	}
+	else if (MapNumber == 2 && h.posx == taille_case*31){
+	  MapNumber=3;
+	  h.SetPosx(taille_case*1);	  
+	}
+	else if (MapNumber == 3 && h.posy == taille_case*0){
+	  MapNumber=2;
+	  h.SetPosy(taille_case*30);
 	}
 	else if (MapNumber == 5 && h.posy == taille_case*23){
 	  MapNumber=2;
