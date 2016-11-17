@@ -331,9 +331,9 @@ int main(int argc, char *argv[])
 	  MapNumber=3;
 	  h.SetPosx(taille_case*1);	  
 	}
-	else if (MapNumber == 3 && h.posy == taille_case*0){
+	else if (MapNumber == 3 && h.posx == taille_case*0){
 	  MapNumber=2;
-	  h.SetPosy(taille_case*30);
+	  h.SetPosx(taille_case*30);
 	}
 	else if (MapNumber == 5 && h.posy == taille_case*23){
 	  MapNumber=2;
