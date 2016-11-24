@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Monstre.h"
 #include <string>
+#include <map>
 #include <time.h>
 #include "Personnage.h"
 #include "Hero.h"
@@ -10,14 +11,55 @@
 #define taille_case 30
 
 Monstre::Monstre(std::string n, int p, int a,  int x, int y) {
-  posx = x;
   posy = y;
+  posx = x;
   nom = n;
   pdv = p;
   atk = a;
   angle = 180;
+  it = 0;
 }
 
+// echec
+std::map<int,int> Monstre::chercheChemin(Personnage h, Map m2, bool trouve, std::map<int,int> p) {
+  trouve = false;
+  m2.mapCourante[posx/taille_case][posy/taille_case] = 1;
+  if (posy == h.posy && posx == h.posx) {
+    trouve = true;
+    p.clear();
+    p[posx/taille_case] =  posy/taille_case;
+  } else {
+    if ( posy/taille_case < 31) {
+      if ( m2.estMur(posx,posy +1) ) {
+	posy += 1;
+	chercheChemin(h, m2, trouve, p);
+      }
+    }
+    if ( posx/taille_case < 23 && !trouve) {
+      if ( m2.estMur(posx+1,posy) ) {
+	posx += taille_case;
+	chercheChemin( h, m2, trouve, p);
+      }
+    }
+    if ( posy/taille_case > 0 && !trouve) {
+      if ( m2.estMur(posx, posy-1) ) {
+	posy -= taille_case;
+	chercheChemin( h, m2, trouve, p);
+      }
+    }
+    if ( posx/taille_case > 0 && !trouve) {
+      if ( m2.estMur(posx-1, posy) ) {
+	posx -= taille_case;
+	chercheChemin(h, m2, trouve, p);
+      }
+    }
+    if (trouve) {
+      p[posx/taille_case] =  posy/taille_case;
+      
+    }
+  }
+  return p;
+}
 
 
 void Monstre::seDeplacer(Personnage h, Map m){
@@ -25,31 +67,32 @@ void Monstre::seDeplacer(Personnage h, Map m){
 		int calculX = h.GetPosx()-posx;  
 		int calculY = h.GetPosx()-posy;
 
-
+		
 		if (h.GetPosx()>posx){ //si le dragon est a gauche du perso
 			temp = 1; //droite
 		}
 
-		if (h.GetPosx()<posx){ //si le dragon est a droite du perso
+		else if (h.GetPosx()<posx){ //si le dragon est a droite du perso
 			temp = 3; //gauche
 		}
 
-		if (h.GetPosx()==posx){
+		else //if (h.GetPosx()==posx)
+		  {
 			if (h.GetPosy()>posy){ //si le dragon est au dessus
 				temp = 2; //bas
 			}
 
-			if (h.GetPosy()<posy){ //si le dragon est en dessous
+			else if (h.GetPosy()<posy){ //si le dragon est en dessous
 				temp = 0; //haut
 			}
 
-			if (h.GetPosy()==posy){
+			else if (h.GetPosy()==posy){
 				temp = -1; //ne bouge pas
 			}
 		}
 
-		 it ++;
-		int mod = it%3;
+		it ++;
+		int mod = it%5;
 
 		if (mod == 1){
 			if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) { //perso vers la droite
@@ -85,10 +128,10 @@ void Monstre::seDeplacer(Personnage h, Map m){
 				}
 			}
 		}
-
+		
 		if (mod == 0){
 		  //int	direction = temp;
-
+		  // if (posx+taile_case == ) 
 
 			//systeme anti collision entre mobs
 			switch (temp) {
@@ -127,6 +170,7 @@ void Monstre::seDeplacer(Personnage h, Map m){
 				break;
 
 			}
+			
 		}
 	}
 
@@ -147,7 +191,7 @@ void Monstre::deplacementAlea(Personnage h, Map m){
 
 
 
-		
+  /*	
   if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) { //perso vers la droite
     if (h.estVivant() != false){
       int hp = h.GetPdv();
@@ -180,55 +224,54 @@ void Monstre::deplacementAlea(Personnage h, Map m){
       h.EstAttaque(true);
     }
  }
-
+*/
 
 
  /**
   * gere la collision
   */
- switch (pos) {
+  switch (pos) {
 
 	  
- case 1: 
-   if ( m.estMur(posx, posy-1)) {
-     if (h.GetPosx() == posx && h.GetPosy() == posy-1 ) {
-     }
-     else {
-       posy -= 1*taille_case;//deplacement vers le haut
-     }
-   }
-   break;
+  case 1: 
+    if ( m.estMur(posx, posy-1)) {
+      if (h.GetPosx() == posx && h.GetPosy() == posy-1 ) {
+      }
+      else {
+	posy -= 1*taille_case;//deplacement vers le haut
+      }
+    }
+    break; 
 
- case 2:  
-   if (m.estMur(posx+1,posy)) {
-     if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) {
-     }
-     else {
-       posx += 1*taille_case;//deplacement vers la droite
-     }
-   }
-   break;
+  case 2:  
+    if (m.estMur(posx+1,posy)) {
+      if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) {
+      }
+      else {
+	posx += 1*taille_case;//deplacement vers la droite
+      }
+    }
+    break;
 
- case 3:  
-   if (m.estMur(posx, posy+1)) {
-     if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) {
-     }
-     else {
-       posy += 1*taille_case;//deplacement vers le bas
-     }
-   }
-   break;
+  case 3:  
+    if (m.estMur(posx, posy+1)) {
+      if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) {
+      }
+      else {
+	posy += 1*taille_case;//deplacement vers le bas
+      }
+    }
+    break;
 
- case 4:  
-   if (m.estMur(posx-1, posy)) {
-     if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) {
-     }
-     else {
-       posx -= 1*taille_case;//deplacement vers la gauche
-     }
-   }
-   break; 
- }
+  case 4:  
+    if (m.estMur(posx-1, posy)) {
+      if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) {
+      }
+      else {
+	posx -= 1*taille_case;//deplacement vers la gauche
+      }
+    }
+    break; 
+  }
 }
 
- 

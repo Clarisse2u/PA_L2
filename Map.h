@@ -15,7 +15,7 @@ class Map
   Map();
    
   void returnMap(int i); 
-  bool estMur(int x, int y);
+  bool estMur(int y, int x);
 
  };
 #endif
