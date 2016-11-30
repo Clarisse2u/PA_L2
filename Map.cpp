@@ -173,8 +173,8 @@ void Map::returnMap (int i) {
     }
 }
 
-  bool Map::estMur(int y, int x) {
-    int i = mapCourante[y/taille_case][x/taille_case];
+  bool Map::estMur(int x, int y) {
+    int i = mapCourante[x/taille_case][y/taille_case];
     if (i == 0 || i == 2 || i == 3 || i == 5) {
       return true;
     } else { 
