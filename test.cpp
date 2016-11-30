@@ -16,9 +16,12 @@
 int main(int argc, char *argv[])
 {
   std::string n = "slime";
+  std::string n2 = "dragon";
   int iter=0;
   Monstre slime1 = Monstre(n, 2, 1, 2*taille_case, 5*taille_case);
+  Monstre drag1 = Monstre(n2, 2, 1, 10*taille_case, 5*taille_case);
   std::vector <Monstre> tabMonstre(1,slime1);
+  tabMonstre.push_back(drag1);
   Hero h = Hero(n,1,2,24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
   int AffI = 0, cpt = 1;
@@ -176,9 +179,8 @@ int main(int argc, char *argv[])
       
 
       for (int i(0);i < tabMonstre.size();i++) {
-	  tabMonstre[i].seDeplacer(h, m);
-
 	  if ( tabMonstre[i].nom == "slime") {
+	    tabMonstre[i].deplacementAlea(h, m);
 	    switch(tabMonstre[i].angle) {
 	    case 0:
 	      Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
@@ -195,6 +197,7 @@ int main(int argc, char *argv[])
 	    }
 	  }
 	  else if ( tabMonstre[i].nom == "dragon") {
+	    tabMonstre[i].seDeplacer(h, m);
 	    switch(tabMonstre[i].angle) {
 	    case 0:
 	      Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
@@ -211,6 +214,7 @@ int main(int argc, char *argv[])
 	    }
 	  }
 	  else if ( tabMonstre[i].nom == "diablotin") {
+	    tabMonstre[i].seDeplacer(h, m);
 	    switch(tabMonstre[i].angle) {
 	    case 0:
 	      Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
