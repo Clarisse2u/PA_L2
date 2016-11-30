@@ -173,25 +173,6 @@ int main(int argc, char *argv[])
       }
       
 
-<<<<<<< HEAD
-      for(int i(0); i<tabMonstre.size(); ++i)  {
-	tabMonstre[i].seDeplacer(h, m);
-	 
-	if ( tabMonstre[i].nom == "slime") {
-	  switch(tabMonstre[i].angle) {
-	  case 0:
-	    Monstre = SDL_LoadBMP("image/Slime_Bas_HD_test.bmp");
-	    break;
-	  case 90:
-	    Monstre = SDL_LoadBMP("image/Slime_Gauche_HD_test.bmp");
-	    break;
-	  case 180:
-	    Monstre = SDL_LoadBMP("image/Slime_Haut_HD_test.bmp");
-	    break;
-	  case 270:
-	    Monstre = SDL_LoadBMP("image/Slime_Droite_HD_test.bmp");
-	    break;
-=======
       for (int i(0);i < tabMonstre.size();i++) {
 	  tabMonstre[i].seDeplacer(h, m);
 
@@ -210,7 +191,6 @@ int main(int argc, char *argv[])
 	      Monstre = SDL_LoadBMP("image/Slime_Droite_HD.bmp");
 	      break;
 	    }
->>>>>>> e4401ecb7b8cd60f08a26de2d6be44426cde996d
 	  }
 	  else if ( tabMonstre[i].nom == "dragon") {
 	    switch(tabMonstre[i].angle) {
@@ -329,7 +309,6 @@ int main(int argc, char *argv[])
   SDL_FreeSurface(Tree1);
   SDL_FreeSurface(Goodies1);
   SDL_FreeSurface(Water1);
-  SDL_FreeSurface(Char);
   SDL_FreeSurface(RecBdv);
   SDL_FreeSurface(Pdv);
   SDL_Quit(); // Arret SDL
