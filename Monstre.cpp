@@ -94,7 +94,7 @@ void Monstre::seDeplacer(Personnage h, Map m){
 		}
 
 		it ++;
-		int mod = it%5;
+		int mod = it%10;
 
 		if (mod == 1){
 			if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) { //perso vers la droite
@@ -139,7 +139,7 @@ void Monstre::seDeplacer(Personnage h, Map m){
 			switch (temp) {
 
 			case 0: 
-			  if (m.estMur(posy-1,posx) && !( h.GetPosx() == posx && h.GetPosy() == posy-1) ) {//si pas de mur
+			  if (m.estMur(posy-1,posx) && ( h.GetPosy() != posy-1) ) {//si pas de mur
 					posy -= 1*taille_case;//deplacement vers le haut
 				}else{
 					deplacementAlea(h, m);
@@ -148,15 +148,14 @@ void Monstre::seDeplacer(Personnage h, Map m){
 
 
 			case 1:  
-			  if (m.estMur(posy,posx+1) && !( h.GetPosx() == posx+1 && h.GetPosy() == posy)) {
+			  if (m.estMur(posy,posx+1) && ( h.GetPosx() != posx+1 )) {
 					posx += 1*taille_case;//deplacement vers la droite
 				}else{
 					deplacementAlea(h, m);
 				}
 				break;
-
 			case 2:  
-			  if (m.estMur(posy+1,posx) && !( h.GetPosx() == posx && h.GetPosy() == posy+1)) {
+			  if (m.estMur(posy+1,posx) && (  h.GetPosy() != posy+1)) {
 					posy += 1*taille_case;//deplacement vers le bas
 				}else{
 				        deplacementAlea(h, m);
@@ -164,7 +163,7 @@ void Monstre::seDeplacer(Personnage h, Map m){
 
 				break;
 			case 3:  
-			  if (m.estMur(posy,posx-1) && !( h.GetPosx() == posx-1 && h.GetPosy() == posy)) {
+			  if (m.estMur(posy,posx-1) && ( h.GetPosx() != posx-1 )) {
 						posx -= 1*taille_case;//deplacement vers la gauche
 				}else{
 				        deplacementAlea(h, m);

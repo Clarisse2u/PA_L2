@@ -33,6 +33,10 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
 	  break;
 	case SDLK_SPACE:
 	  h.Attaque(false);
+	  int t = tabMonstre.size();
+	  for (int i = 0; i < t; i++)  {
+	    tabMonstre[i].EstAttaque(false);
+	  }
 	  break;
 	}
       break;
