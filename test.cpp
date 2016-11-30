@@ -26,10 +26,10 @@ int main(int argc, char *argv[])
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
   int AffI = 0, cpt = 1;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
-  SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *Char = NULL, *RecBdv = NULL;
+  SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL, *Ground2 = NULL;
-  SDL_Rect PosMenu, PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
-  SDL_Rect CharPosS, CharPosD, PdvPos;
+  SDL_Rect PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
+  SDL_Rect PdvPos;
   SDL_Event event;
   Map m = Map();
 
@@ -37,11 +37,11 @@ int main(int argc, char *argv[])
   GamePos.x = 0;
   GamePos.y = 0;
 
-  PosMenu.x=taille_case*32;
-  PosMenu.y=0;
-  
   PosHero.x = h.posx;
   PosHero.y = h.posy;
+  
+  PosPlayerMenu.x = 32*taille_case;
+  PosPlayerMenu.y = 0;
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -49,10 +49,8 @@ int main(int argc, char *argv[])
   SDL_EnableKeyRepeat(15, 50);
   SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
 
-  PlayerMenu = SDL_CreateRGBSurface(SDL_HWSURFACE, 180, 24*taille_case, 32, 255, 255, 255, 0);
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
-  SDL_FillRect(PlayerMenu, NULL, SDL_MapRGB(PlayerMenu->format, 255, 255, 255));
   
   Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
   Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
@@ -66,9 +64,9 @@ int main(int argc, char *argv[])
   Goodies2 = SDL_LoadBMP("image/Sol1.bmp");
   Goodies3 = SDL_LoadBMP("image/Sol2.bmp");
   Water1 = SDL_LoadBMP("image/lac.bmp");
-  Char = SDL_LoadBMP("image/caracteres.bmp");
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
+  PlayerMenu = SDL_LoadBMP("image/Background_Menu.bmp");
 
 
   
@@ -85,7 +83,7 @@ int main(int argc, char *argv[])
 
 
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
-      SDL_BlitSurface(PlayerMenu, NULL, screen, &PosMenu);
+      SDL_BlitSurface(PlayerMenu, NULL, screen, &PosPlayerMenu);
       
       //chargement de la map
       m.returnMap(MapNumber);
@@ -178,6 +176,7 @@ int main(int argc, char *argv[])
       }
       
 
+
       for (int i(0);i < tabMonstre.size();i++) {
 	  if ( tabMonstre[i].nom == "slime") {
 	    tabMonstre[i].deplacementAlea(h, m);
@@ -263,71 +262,16 @@ int main(int argc, char *argv[])
       }
 
       //Player Menu
-      AffichageMenu = 0;
-      //Affichage lettres
-      while (!AffichageMenu) {
-	switch(AffI){
-	case 1:
-	  switch(cpt){
-	  case 1:
-	    Afftmpx = 1;
-	    Afftmpy = 3;
-	    break;
-	  case 2:
-	    Afftmpx = 4;
-	    Afftmpy = 0;
-	    break;
-	  case 3:
-	    Afftmpx = 0;
-	    Afftmpy = 3;
-	    break;
-	  case 4:
-	    Afftmpx = 1;
-	    Afftmpy = 3;
-	    AffichageMenu=1;
-	    break;
-	  }
-	  break;
-	  /*case 2:
-	  switch(cpt){
-	  case 1:
-	    Afftmpx = 5;
-	    Afftmpy = 1;
-	    break;
-	  case 2:
-	    Afftmpx = 3;
-	    Afftmpy = 3;
-	    break;
-	  case 3:
-	    Afftmpx = 5;
-	    Afftmpy = 1;
-	    AffichageMenu = 1;
-	    break;
-	    }*/
-	}
-	
-	cpt++;
-	if (cpt==5) cpt=0;
-	AffI++;
-	if (AffI== 3) AffI=1;
-
-	CharPosS.x = 30*Afftmpx;
-	CharPosS.y = 30*Afftmpy;
-	CharPosS.w = 30;
-	CharPosS.h = 30;
-	CharPosD.x = taille_case*32+30+cpt*30;
-	CharPosD.y = 50;
-	SDL_BlitSurface(Char, &CharPosS, screen, &CharPosD);
-      }
+            
 
       //Affichage barre de vie
       
-      BdvPos.x = taille_case*32+10;
-      BdvPos.y = 300;
+      BdvPos.x = taille_case*32+35;
+      BdvPos.y = 100;
       SDL_BlitSurface(RecBdv, NULL, screen, &BdvPos);
 
-      PdvPos.x = taille_case*32+11;
-      PdvPos.y = 301;
+      PdvPos.x = taille_case*32+36;
+      PdvPos.y = 101;
       SDL_BlitSurface(Pdv, NULL, screen, &PdvPos);
 
       //changement de map
