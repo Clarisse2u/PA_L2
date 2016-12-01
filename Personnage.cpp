@@ -14,10 +14,13 @@ Personnage::Personnage(std::string n, int p, int a,int x, int y) {
   posx = x;
   posy = y;
   angle = 0;
+  attaque = false;
+  estAttaque = false;
 }
 
 void Personnage::attaquer(Personnage p){
   p.SetPdv(p.GetPdv()-atk);
+  p.estAttaque = true;
 }
 
 bool Personnage::estVivant() {

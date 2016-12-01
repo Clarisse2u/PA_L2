@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
   SDL_Init(SDL_INIT_VIDEO);
   
   screen = SDL_SetVideoMode(32*taille_case+180, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
-  SDL_EnableKeyRepeat(15, 50);
+  SDL_EnableKeyRepeat(15, 150);
   SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
 
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
@@ -154,83 +154,103 @@ int main(int argc, char *argv[])
       
       // dessin du perso en fonction de l'angle 
       int ang = h.angle;
-      switch(ang) {
-      case 0:
-	Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
-	break;
-      case 90:
-	Hero = SDL_LoadBMP("image/Mage_Gauche_SD.bmp");
-	break;
-      case 180:
-	Hero = SDL_LoadBMP("image/Mage_Haut_SD.bmp");
-	break;
-      case 270:
-	Hero = SDL_LoadBMP("image/Mage_Droite_SD.bmp");
-	break;
-      }
 
-      SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
-      if (h.attaque) {
-	Hero = SDL_LoadBMP("image/flowers_30.bmp");
-	SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
-      }
       
+      if (h.attaque) {
+	switch(ang) {
+	case 0:
+	  Hero = SDL_LoadBMP("image/Mage_Bas_Fireball.bmp");
+	  break;
+	case 90:
+	  Hero = SDL_LoadBMP("image/Mage_Gauche_Fireball.bmp");
+	  break;
+	case 180:
+	  Hero = SDL_LoadBMP("image/Mage_Haut_Fireball.bmp");
+	  break;
+	case 270:
+	  Hero = SDL_LoadBMP("image/Mage_Droite_Fireball.bmp");
+	  break;
+	}
+      } else {
+	switch(ang) {
+	case 0:
+	  Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
+	  break;
+	case 90:
+	  Hero = SDL_LoadBMP("image/Mage_Gauche_SD.bmp");
+	  break;
+	case 180:
+	  Hero = SDL_LoadBMP("image/Mage_Haut_SD.bmp");
+	  break;
+	case 270:
+	  Hero = SDL_LoadBMP("image/Mage_Droite_SD.bmp");
+	  break;
+	}
+      }
+<<<<<<< HEAD
+      
+=======
+      SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
+>>>>>>> c9b59cb74419c659c41693786f8bfcdba9c87a51
 
       for (int i(0);i < tabMonstre.size();i++) {
-	  if ( tabMonstre[i].nom == "slime") {
-	    tabMonstre[i].deplacementAlea(h, m);
-	    switch(tabMonstre[i].angle) {
-	    case 0:
-	      Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
-	      break;
-	    case 90:
-	      Monstre = SDL_LoadBMP("image/Slime_Gauche_HD.bmp");
-	      break;
-	    case 180:
-	      Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
-	      break;
-	    case 270:
-	      Monstre = SDL_LoadBMP("image/Slime_Droite_HD.bmp");
-	      break;
-	    }
+	if (tabMonstre[i].estAttaque) {
+	  Monstre = SDL_LoadBMP("image/Dragon_Degat.bmp");
+	  printf("NIKTAMER");
+	} else if ( tabMonstre[i].nom == "slime") {
+	  tabMonstre[i].deplacementAlea(h, m);
+	  switch(tabMonstre[i].angle) {
+	  case 0:
+	    Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
+	    break;
+	  case 90:
+	    Monstre = SDL_LoadBMP("image/Slime_Gauche_HD.bmp");
+	    break;
+	  case 180:
+	    Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
+	    break;
+	  case 270:
+	    Monstre = SDL_LoadBMP("image/Slime_Droite_HD.bmp");
+	    break;
 	  }
-	  else if ( tabMonstre[i].nom == "dragon") {
-	    tabMonstre[i].seDeplacer(h, m);
-	    switch(tabMonstre[i].angle) {
-	    case 0:
-	      Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
-	      break;
-	    case 90:
-	      Monstre = SDL_LoadBMP("image/Dragon_Gauche_HD.bmp");
-	      break;
-	    case 180:
-	      Monstre = SDL_LoadBMP("image/Dragon_Haut_HD.bmp");
-	      break;
-	    case 270:
-	      Monstre = SDL_LoadBMP("image/Dragon_Droite_HD.bmp");
-	      break;
-	    }
+	}
+	else if ( tabMonstre[i].nom == "dragon") {
+	  tabMonstre[i].seDeplacer(h, m);
+	  switch(tabMonstre[i].angle) {
+	  case 0:
+	    Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
+	    break;
+	  case 90:
+	    Monstre = SDL_LoadBMP("image/Dragon_Gauche_HD.bmp");
+	    break;
+	  case 180:
+	    Monstre = SDL_LoadBMP("image/Dragon_Haut_HD.bmp");
+	    break;
+	  case 270:
+	    Monstre = SDL_LoadBMP("image/Dragon_Droite_HD.bmp");
+	    break;
 	  }
-	  else if ( tabMonstre[i].nom == "diablotin") {
-	    tabMonstre[i].seDeplacer(h, m);
-	    switch(tabMonstre[i].angle) {
-	    case 0:
-	      Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
-	      break;
-	    case 90:
-	      Monstre = SDL_LoadBMP("image/Diablotin_Gauche_HD.bmp");
-	      break;
-	    case 180:
-	      Monstre = SDL_LoadBMP("image/Diablotin_Haut_HD.bmp");
-	      break;
-	    case 270:
-	      Monstre = SDL_LoadBMP("image/Diablotin_Droite_HD.bmp");
-	      break;
-	    }
+	}
+	else if ( tabMonstre[i].nom == "diablotin") {
+	  tabMonstre[i].seDeplacer(h, m);
+	  switch(tabMonstre[i].angle) {
+	  case 0:
+	    Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
+	    break;
+	  case 90:
+	    Monstre = SDL_LoadBMP("image/Diablotin_Gauche_HD.bmp");
+	    break;
+	  case 180:
+	    Monstre = SDL_LoadBMP("image/Diablotin_Haut_HD.bmp");
+	    break;
+	  case 270:
+	    Monstre = SDL_LoadBMP("image/Diablotin_Droite_HD.bmp");
+	    break;
 	  }
-	  PosMonstre.x = tabMonstre[i].posx;
-	  PosMonstre.y = tabMonstre[i].posy;
-	  SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
+	}
+	PosMonstre.x = tabMonstre[i].posx;
+	PosMonstre.y = tabMonstre[i].posy;
+	SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
 
       }
       
