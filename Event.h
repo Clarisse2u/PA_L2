@@ -10,5 +10,6 @@
 #define Event_H
 
 void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre> tabMonstre);
+void HandleEnd(SDL_Event event, int &var);
 
 #endif

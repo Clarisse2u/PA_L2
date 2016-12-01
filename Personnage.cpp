@@ -19,8 +19,23 @@ Personnage::Personnage(std::string n, int p, int a,int x, int y) {
 }
 
 void Personnage::attaquer(Personnage p){
-  p.SetPdv(p.GetPdv()-atk);
+  p.pdv -= atk;
   p.estAttaque = true;
+  printf("MDRRRRRRRRRRRRR\n");
+  switch(p.angle) {
+  case 0:
+    p.posx -= 1;
+    break;
+  case 90:
+    p.posy += 1;
+    break;
+  case 180:
+    p.posx += 1;
+    break;
+  case 270:
+    p.posy -= 1;
+    break;
+  }
 }
 
 bool Personnage::estVivant() {
@@ -86,3 +101,4 @@ int Personnage::GetAngle() {
 void Personnage::SetAngle(int ang) {
   angle = ang;
 }
+

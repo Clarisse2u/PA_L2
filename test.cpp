@@ -15,21 +15,19 @@
 
 int main(int argc, char *argv[])
 {
-  std::string n = "slime";
-  std::string n2 = "dragon";
   int iter=0;
-  Monstre slime1 = Monstre(n, 2, 1, 2*taille_case, 5*taille_case);
-  Monstre drag1 = Monstre(n2, 2, 1, 10*taille_case, 5*taille_case);
+  Monstre slime1 = Monstre("slime", 2, 1, 2*taille_case, 5*taille_case);
+  Monstre drag1 = Monstre("dragon", 2, 1, 10*taille_case, 5*taille_case);
   std::vector <Monstre> tabMonstre(1,slime1);
   tabMonstre.push_back(drag1);
-  Hero h = Hero(n,1,2,24*taille_case/2,32*taille_case/2);
+  Hero h = Hero("Gandalf",1,2,24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
-  int AffI = 0, cpt = 1;
+  int AffI = 0, cpt = 1, test = 0;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
-  SDL_Surface *Pdv = NULL, *Ground2 = NULL;
+  SDL_Surface *Pdv = NULL, *Ground2 = NULL, *GameWon = NULL, *Name = NULL;
   SDL_Rect PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
-  SDL_Rect PdvPos;
+  SDL_Rect PdvPos, PosGameWon, PosName;
   SDL_Event event;
   Map m = Map();
 
@@ -37,11 +35,24 @@ int main(int argc, char *argv[])
   GamePos.x = 0;
   GamePos.y = 0;
 
+  PosGameWon.x = 0;
+  PosGameWon.y = 0;
+
   PosHero.x = h.posx;
   PosHero.y = h.posy;
   
   PosPlayerMenu.x = 32*taille_case;
   PosPlayerMenu.y = 0;
+
+  PosName.x = taille_case*32+35;
+  PosName.y = 55;
+
+  BdvPos.x = taille_case*32+35;
+  BdvPos.y = 100;
+
+  
+  PdvPos.x = taille_case*32+36;
+  PdvPos.y = 101;
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -67,6 +78,8 @@ int main(int argc, char *argv[])
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
   PlayerMenu = SDL_LoadBMP("image/Background_Menu.bmp");
+  GameWon = SDL_LoadBMP("image/GameWon.bmp");
+  Name = SDL_LoadBMP("image/Name.bmp");
 
 
   
@@ -84,7 +97,8 @@ int main(int argc, char *argv[])
 
       SDL_BlitSurface(GameScreen, NULL, screen, &GamePos);
       SDL_BlitSurface(PlayerMenu, NULL, screen, &PosPlayerMenu);
-      
+      SDL_BlitSurface(Name, NULL, screen, &PosName);
+	
       //chargement de la map
       m.returnMap(MapNumber);
 
@@ -187,16 +201,12 @@ int main(int argc, char *argv[])
 	  break;
 	}
       }
-<<<<<<< HEAD
-      
-=======
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
->>>>>>> c9b59cb74419c659c41693786f8bfcdba9c87a51
 
       for (int i(0);i < tabMonstre.size();i++) {
 	if (tabMonstre[i].estAttaque) {
+	  printf("CAMEMBERT");
 	  Monstre = SDL_LoadBMP("image/Dragon_Degat.bmp");
-	  printf("NIKTAMER");
 	} else if ( tabMonstre[i].nom == "slime") {
 	  tabMonstre[i].deplacementAlea(h, m);
 	  switch(tabMonstre[i].angle) {
@@ -280,17 +290,8 @@ int main(int argc, char *argv[])
 	}
       }
 
-      //Player Menu
-            
-
-      //Affichage barre de vie
-      
-      BdvPos.x = taille_case*32+35;
-      BdvPos.y = 100;
+      //Affichage Menu Joueur
       SDL_BlitSurface(RecBdv, NULL, screen, &BdvPos);
-
-      PdvPos.x = taille_case*32+36;
-      PdvPos.y = 101;
       SDL_BlitSurface(Pdv, NULL, screen, &PdvPos);
 
       //changement de map
@@ -321,10 +322,27 @@ int main(int argc, char *argv[])
 	  h.SetPosy(taille_case*1);
 	}
       }
-
+      
+      test++;
+      if(test == 50)game = 2;
 
       SDL_Flip(screen);
     }
+
+  while (game == 1){
+    HandleEnd(event, game);
+    SDL_BlitSurface(GameWon, NULL, screen, &PosGameWon);
+    SDL_Flip(screen);
+  }
+
+
+
+  while (game == 2){
+    GameWon = SDL_LoadBMP("image/GameOver.bmp");
+    HandleEnd(event, game);
+    SDL_BlitSurface(GameWon, NULL, screen, &PosGameWon);
+    SDL_Flip(screen);
+  }
 
   SDL_FreeSurface(Hero);
   SDL_FreeSurface(Wall1);
