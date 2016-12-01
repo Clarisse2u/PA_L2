@@ -4,9 +4,10 @@
 #include "Item.h"
 
 
-Item::Item(std::string n, int x, int y) {
+Item::Item(std::string n, int x, int y, int spawn) {
   nom = n;
   posx = x;
   posy = y;
+  mapSpawn = spawn;
   ramasse = false;
 }

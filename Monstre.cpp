@@ -10,9 +10,10 @@
 
 #define taille_case 30
 
-Monstre::Monstre(std::string n, int p, int a,  int x, int y) {
+Monstre::Monstre(std::string n, int p, int a,  int x, int y, int spawn) {
   posy = y;
   posx = x;
+  mapSpawn = spawn;
   nom = n;
   pdv = p;
   atk = a;

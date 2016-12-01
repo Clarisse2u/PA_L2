@@ -13,11 +13,11 @@ class Item {
 public:
   // attributs
   std::string nom;
-  int posx, posy;
+  int posx, posy, mapSpawn;
   bool ramasse;
 
  // methodes
-  Item(std::string n, int x,int y);
+  Item(std::string n, int x,int y, int spawn);
 
   };
 
