@@ -16,7 +16,6 @@
 
 int main(int argc, char *argv[])
 {
-  int iter=0;
   Monstre slime1 = Monstre("slime", 4, 1, 2*taille_case, 5*taille_case);
   Monstre drag1 = Monstre("dragon", 15, 3, 10*taille_case, 5*taille_case);
   std::vector <Monstre> tabMonstre(1,slime1);
@@ -24,13 +23,12 @@ int main(int argc, char *argv[])
   Item item = Item("Vie", 6*taille_case, 5*taille_case);
   std::vector <Item> tabItem(1,item);
   Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
-  int AffI = 0, cpt = 1;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Item = NULL, *Hero = NULL, *Wall2 = NULL, *Ground1 = NULL;
+  int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, pdv_base = h.pdv;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Item = NULL, *Hero = NULL, *Wall = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
-  SDL_Surface *Pdv = NULL, *Ground2 = NULL, *GameWon = NULL, *Name = NULL;
-  SDL_Rect PosHero, PosMonstre, PosItem, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
-  SDL_Rect PdvPos, PosGameWon, PosName;
+  SDL_Surface *Pdv = NULL, *Ground1 = NULL, *Ground2 = NULL, *GameEnd = NULL, *Name = NULL;
+  SDL_Rect PosHero, PosMonstre, PosItem, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
+  SDL_Rect PdvPosS, PdvPosD, PosGameEnd, PosName, PosPlayerMenu;
   SDL_Event event;
   Map m = Map();
 
@@ -38,8 +36,8 @@ int main(int argc, char *argv[])
   GamePos.x = 0;
   GamePos.y = 0;
 
-  PosGameWon.x = 0;
-  PosGameWon.y = 0;
+  PosGameEnd.x = 0;
+  PosGameEnd.y = 0;
 
   PosHero.x = h.posx;
   PosHero.y = h.posy;
@@ -54,8 +52,13 @@ int main(int argc, char *argv[])
   BdvPos.y = 100;
 
   
-  PdvPos.x = taille_case*32+36;
-  PdvPos.y = 101;
+  PdvPosD.x = taille_case*32+36;
+  PdvPosD.y = 101;
+  PdvPosS.x = 0;
+  PdvPosS.y = 0;
+  PdvPosS.w = 100;
+  PdvPosS.h = 18;
+
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -68,7 +71,7 @@ int main(int argc, char *argv[])
   
   Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
   Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
-  Wall2 = SDL_LoadBMP("image/Bush_30.bmp");
+  Wall = SDL_LoadBMP("image/Bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
   Ground2 = SDL_LoadBMP("image/terre_30.bmp");
   Way1 = SDL_LoadBMP("image/chemin_30.bmp");
@@ -80,7 +83,7 @@ int main(int argc, char *argv[])
   RecBdv = SDL_LoadBMP("image/Rectangle_bdv.bmp");
   Pdv = SDL_LoadBMP("image/Bdv_100.bmp");
   PlayerMenu = SDL_LoadBMP("image/Background_Menu.bmp");
-  GameWon = SDL_LoadBMP("image/GameWon.bmp");
+  GameEnd = SDL_LoadBMP("image/GameWon.bmp");
   Name = SDL_LoadBMP("image/Name.bmp");
 
 
@@ -119,7 +122,7 @@ int main(int argc, char *argv[])
 	  else if (m.mapCourante[i][j]==1){
 	    WallPos.x = taille_case*j;
 	    WallPos.y = taille_case*i;
-	    SDL_BlitSurface(Wall2, NULL, screen, &WallPos);
+	    SDL_BlitSurface(Wall, NULL, screen, &WallPos);
 	  }
 	  else if (m.mapCourante[i][j]==2){
 	    GoodiesPos.x = taille_case*j;
@@ -313,8 +316,9 @@ int main(int argc, char *argv[])
       }
 
       //Affichage Menu Joueur
+      PdvPosS.w = h.pdv*100/pdv_base;
       SDL_BlitSurface(RecBdv, NULL, screen, &BdvPos);
-      SDL_BlitSurface(Pdv, NULL, screen, &PdvPos);
+      SDL_BlitSurface(Pdv, &PdvPosS, screen, &PdvPosD);
 
       //changement de map
 
@@ -352,21 +356,21 @@ int main(int argc, char *argv[])
 
   while (game == 1){
     HandleEnd(event, game);
-    SDL_BlitSurface(GameWon, NULL, screen, &PosGameWon);
+    SDL_BlitSurface(GameEnd, NULL, screen, &PosGameEnd);
     SDL_Flip(screen);
   }
 
 
 
   while (game == 2){
-    GameWon = SDL_LoadBMP("image/GameOver.bmp");
+    GameEnd = SDL_LoadBMP("image/GameOver.bmp");
     HandleEnd(event, game);
-    SDL_BlitSurface(GameWon, NULL, screen, &PosGameWon);
+    SDL_BlitSurface(GameEnd, NULL, screen, &PosGameEnd);
     SDL_Flip(screen);
   }
 
   SDL_FreeSurface(Hero);
-  SDL_FreeSurface(Wall2);
+  SDL_FreeSurface(Wall);
   SDL_FreeSurface(Ground1);
   SDL_FreeSurface(Tree1);
   SDL_FreeSurface(Goodies1);
