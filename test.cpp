@@ -18,14 +18,26 @@ int main(int argc, char *argv[])
 {
   Monstre slime1 = Monstre("slime", 4, 1, 2*taille_case, 5*taille_case, 2);
   Monstre slime2 = Monstre("slime", 4, 1, 16*taille_case, 15*taille_case, 2);
+  Monstre slime3 = Monstre("slime", 4, 1, 5*taille_case, 18*taille_case, 1);
+  Monstre slime4 = Monstre("slime", 4, 1, 25*taille_case, 3*taille_case, 1);
+  Monstre slime5 = Monstre("slime", 4, 1, 17*taille_case, 14*taille_case, 1);
+  Monstre slime6 = Monstre("slime", 4, 1, 20*taille_case, 10*taille_case, 3);
   Monstre drag1 = Monstre("dragon", 15, 3, 10*taille_case, 5*taille_case, 5);
+  Monstre drag2 = Monstre("dragon", 15, 3, 21*taille_case, 3*taille_case, 5);
   Monstre diablotin1 = Monstre("diablotin", 6, 1, 18*taille_case, 18*taille_case, 2);
-  Monstre diablotin2 = Monstre("diablotin", 6, 1, 2*taille_case, 5*taille_case, 5);
+  Monstre diablotin2 = Monstre("diablotin", 6, 1, 4*taille_case, 9*taille_case, 3);
+  Monstre diablotin3 = Monstre("diablotin", 6, 1, 9*taille_case, 15*taille_case, 3);
   std::vector <Monstre> tabMonstre(1,slime1);
   tabMonstre.push_back(slime2);
+  tabMonstre.push_back(slime3);
+  tabMonstre.push_back(slime4);
+  tabMonstre.push_back(slime5);
+  tabMonstre.push_back(slime6);
   tabMonstre.push_back(drag1);
+  tabMonstre.push_back(drag2);
   tabMonstre.push_back(diablotin1);
   tabMonstre.push_back(diablotin2);
+  tabMonstre.push_back(diablotin3);
   Item item = Item("Vie", 6*taille_case, 5*taille_case, 2);
   std::vector <Item> tabItem(1,item);
   Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);

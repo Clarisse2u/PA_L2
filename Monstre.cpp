@@ -107,36 +107,9 @@ void Monstre::seDeplacer(Personnage &h, Map m){
 	attaquer(h,m);
       }
     }
-    /* if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers le haut
-      if (h.estVivant() ){
-	int hp = h.GetPdv();
-	hp--;
-	h.SetPdv(hp);
-	h.EstAttaque(true);
-      }
-    }
-    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
-      if (h.estVivant() ){
-	int hp = h.GetPdv();
-	hp--;
-	h.SetPdv(hp);
-	h.EstAttaque(true);
-      }
-    }
-    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { // perso vers le bas
-    if (h.estVivant() ){
-    int hp = h.GetPdv();
-    hp--;
-    h.SetPdv(hp);
-    h.EstAttaque(true);
-	}
-      }*/
   }
 		
   if (mod == 0){
-    //int	direction = temp;
-    //if (posx+taille_case == ) 
-
     //systeme anti collision entre mobs
     switch (temp) {
 
@@ -191,7 +164,7 @@ void Monstre::deplacementAlea(Personnage &h, Map m){
   srand (time(NULL));
 
   /* generate secret number between 1 and 10: */
-  int pos = rand() % 4 + 1;
+  int pos = rand() % 3 + 1;
   it ++;
   int mod = it%10;
 
