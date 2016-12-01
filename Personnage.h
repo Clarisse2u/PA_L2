@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include "Map.h"
 
 #ifndef Personnage_H
 #define Personnage_H
@@ -19,7 +20,7 @@ public:
   Personnage();
   Personnage(std::string n, int p, int a, int x,int y);
   virtual void seDeplacer() {};
-  void attaquer(Personnage &p);
+  void attaquer(Personnage &p,Map m);
   bool estVivant();
   void Attaque(bool b);
   void EstAttaque(bool b);

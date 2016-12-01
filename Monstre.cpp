@@ -103,8 +103,7 @@ void Monstre::seDeplacer(Personnage &h, Map m){
   if (mod == 0){
     if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
       if (h.estVivant() ){
-	attaquer(h);
-	printf("%d\n",h.pdv);
+	attaquer(h,m);
       }
     }
     /* if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers le haut
@@ -141,7 +140,7 @@ void Monstre::seDeplacer(Personnage &h, Map m){
     switch (temp) {
 
     case 0: 
-      if (m.estMur(posy-1,posx) && ( h.GetPosy() != posy) ) {//si pas de mur
+      if (m.estMur(posy-taille_case,posx) && ( h.GetPosy() != posy) ) {//si pas de mur
 	posy -= 1*taille_case;//deplacement vers le haut
 	angle = 180;
       }else{
@@ -149,7 +148,7 @@ void Monstre::seDeplacer(Personnage &h, Map m){
       }
       break;
     case 1:  
-      if (m.estMur(posy,posx+1) && ( h.GetPosx() != posx )) {
+      if (m.estMur(posy,posx+taille_case) && ( h.GetPosx() != posx )) {
 	posx += 1*taille_case;//deplacement vers la droite
 	angle = 270;
       }else{
@@ -157,7 +156,7 @@ void Monstre::seDeplacer(Personnage &h, Map m){
       }
       break;
     case 2:  
-      if (m.estMur(posy+1,posx) && (  h.GetPosy() != posy)) {
+      if (m.estMur(posy+taille_case,posx) && (  h.GetPosy() != posy)) {
 	posy += 1*taille_case;//deplacement vers le bas
 	angle = 0;
       }else{
@@ -165,7 +164,7 @@ void Monstre::seDeplacer(Personnage &h, Map m){
       }
       break;
     case 3:  
-      if (m.estMur(posy,posx-1) && ( h.GetPosx() != posx )) {
+      if (m.estMur(posy,posx-taille_case) && ( h.GetPosx() != posx )) {
 	posx -= 1*taille_case;//deplacement vers la gauche
 	angle = 90;
       }else{
@@ -192,95 +191,83 @@ void Monstre::deplacementAlea(Personnage &h, Map m){
 
   /* generate secret number between 1 and 10: */
   int pos = rand() % 4 + 1;
-
-
-
-  	
-  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
-    if (h.estVivant() != false){
-      int hp = h.GetPdv();
-      hp--;
-      h.SetPdv(hp);
-      h.EstAttaque(true);
-    }
-  }
-  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers le haut
-    if (h.estVivant() != false){
-      int hp = h.GetPdv();
-      hp--;
-      h.SetPdv(hp);
-      h.EstAttaque(true);
-    }
-  }
-  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
-    if (h.estVivant() != false){
-      int hp = h.GetPdv();
-      hp--;
-      h.SetPdv(hp);
-      h.EstAttaque(true);
-    }
-  }
-  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { // perso vers le bas
-    if (h.estVivant() != false){
-      int hp = h.GetPdv();
-      hp--;
-      h.SetPdv(hp);
-      h.EstAttaque(true);
-    }
-  }
-
-   it ++;
+  it ++;
   int mod = it%10;
+
+
+  if ( mod == 0) {
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
+      if (h.estVivant() != false){
+	attaquer(h,m);
+      }
+    }
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers le haut
+      if (h.estVivant() != false){
+	attaquer(h,m);
+      }
+    }
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
+      if (h.estVivant() != false){
+	attaquer(h,m);
+      }
+    }
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { // perso vers le bas
+      if (h.estVivant() != false){
+	attaquer(h,m);
+      }
+    }
+  }
+
   if (mod == 1){
-  /**
-   * gere la collision
-   */
-  switch (pos) {
+    /**
+     * gere la collision
+     */
+    switch (pos) {
 
 	  
-  case 1: 
-    if ( m.estMur(posy-1,posx)) {
-      if (h.GetPosx() == posx && h.GetPosy() == posy-1 ) {
+    case 1: 
+      if ( m.estMur(posy-taille_case,posx)) {
+	if (h.GetPosx() == posx && h.GetPosy() == posy-1 ) {
+	}
+	else {
+	  posy -= 1*taille_case;//deplacement vers le haut
+	  angle = 180;
+	}
       }
-      else {
-	posy -= 1*taille_case;//deplacement vers le haut
-	angle = 180;
-      }
-    }
-    break; 
+      break; 
 
-  case 2:  
-    if (m.estMur(posy,posx+1)) {
-      if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) {
+    case 2:  
+      if (m.estMur(posy,posx+taille_case)) {
+	if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) {
+	}
+	else {
+	  posx += 1*taille_case;//deplacement vers la droite
+	  angle = 270;
+	}
       }
-      else {
-	posx += 1*taille_case;//deplacement vers la droite
-	angle = 270;
-      }
-    }
-    break;
+      break;
 
-  case 3:  
-    if (m.estMur(posy+1,posx)) {
-      if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) {
+    case 3:  
+      if (m.estMur(posy+taille_case,posx)) {
+	if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) {
+	}
+	else {
+	  posy += 1*taille_case;//deplacement vers le bas
+	  angle = 0;
+	}
       }
-      else {
-	posy += 1*taille_case;//deplacement vers le bas
-	angle = 0;
+      break;
+    case 4:  
+      if (m.estMur(posy,posx-taille_case)) {
+	if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) {
+	}
+	else {
+	  posx -= 1*taille_case;//deplacement vers la gauche
+	  angle = 90;
+	}
       }
+      break; 
     }
-    break;
-  case 4:  
-    if (m.estMur(posy,posx-1)) {
-      if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) {
-      }
-      else {
-	posx -= 1*taille_case;//deplacement vers la gauche
-	angle = 90;
-      }
-    }
-    break; 
-  }
   }
 }
 

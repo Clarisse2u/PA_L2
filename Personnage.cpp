@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string>
 #include "Personnage.h"
+#include "Map.h"
 
 #define taille_case 30
 
@@ -20,21 +21,29 @@ Personnage::Personnage(std::string n, int p, int a,int x, int y) {
   estAttaque = false;
 }
 
-void Personnage::attaquer(Personnage &p){
+void Personnage::attaquer(Personnage &p, Map m){
   p.pdv -= atk;
   p.estAttaque = true;
   switch(angle) {
   case 0:
-    p.posy += taille_case;
+    if (m.estMur(p.posy+taille_case,p.posx)) {
+      p.posy += taille_case;
+    }
     break;
   case 90:
-    p.posx -= taille_case;
+    if (m.estMur(p.posy+taille_case,p.posx)) {
+      p.posx -= taille_case;
+    }
     break;
   case 180:
-    p.posy -= taille_case;
+    if (m.estMur(p.posy+taille_case,p.posx)) {
+      p.posy -= taille_case;
+    }
     break;
   case 270:
-    p.posx += taille_case;
+    if (m.estMur(p.posy+taille_case,p.posx)) {
+      p.posx += taille_case;
+    }
     break;
   }
   if (p.pdv < 1) {

@@ -85,22 +85,22 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
 	    switch (ang) {
 	    case 0:
 	      if ( mx == hx && my == (hy) ) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    case 90:
 	      if ( mx == hx && my == hy) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    case 180:
 	      if ( mx == hx && my == hy ) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    case 270:
 	      if ( mx == hx && my == hy) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    }
