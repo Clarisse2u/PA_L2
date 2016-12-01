@@ -15,11 +15,9 @@
 
 int main(int argc, char *argv[])
 {
-  std::string n = "slime";
-  std::string n2 = "dragon";
   int iter=0;
-  Monstre slime1 = Monstre(n, 2, 1, 2*taille_case, 5*taille_case);
-  Monstre drag1 = Monstre(n2, 2, 1, 10*taille_case, 5*taille_case);
+  Monstre slime1 = Monstre("slime", 2, 1, 2*taille_case, 5*taille_case);
+  Monstre drag1 = Monstre("dragon", 2, 1, 10*taille_case, 5*taille_case);
   std::vector <Monstre> tabMonstre(1,slime1);
   tabMonstre.push_back(drag1);
   Hero h = Hero(n,1,2,24*taille_case/2,32*taille_case/2);
