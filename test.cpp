@@ -248,7 +248,6 @@ int main(int argc, char *argv[])
 	  SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
 	}
       }
-      
 
 
       for(int i=0; i<24; i++){

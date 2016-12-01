@@ -23,18 +23,18 @@ Personnage::Personnage(std::string n, int p, int a,int x, int y) {
 void Personnage::attaquer(Personnage &p){
   p.pdv -= atk;
   p.estAttaque = true;
-  switch(p.angle) {
+  switch(angle) {
   case 0:
-    p.posx -= taille_case;
-    break;
-  case 90:
     p.posy += taille_case;
     break;
+  case 90:
+    p.posx -= taille_case;
+    break;
   case 180:
-    p.posx += taille_case;
+    p.posy -= taille_case;
     break;
   case 270:
-    p.posy -= taille_case;
+    p.posx += taille_case;
     break;
   }
   if (p.pdv < 1) {

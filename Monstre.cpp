@@ -68,7 +68,7 @@ Monstre::Monstre(std::string n, int p, int a,  int x, int y) {
 */
 
 
-void Monstre::seDeplacer(Personnage h, Map m){
+void Monstre::seDeplacer(Personnage &h, Map m){
   int temp = -1; //variable temporaire donnant la direction du dragon au switch
   int calculX = h.GetPosx()-posx;  
   int calculY = h.GetPosx()-posy;
@@ -100,8 +100,14 @@ void Monstre::seDeplacer(Personnage h, Map m){
   it ++;
   int mod = it%10;
 
-  if (mod == 1){
-    if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) { //perso vers la droite
+  if (mod == 0){
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
+      if (h.estVivant() ){
+	attaquer(h);
+	printf("%d\n",h.pdv);
+      }
+    }
+    /* if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers le haut
       if (h.estVivant() ){
 	int hp = h.GetPdv();
 	hp--;
@@ -109,7 +115,7 @@ void Monstre::seDeplacer(Personnage h, Map m){
 	h.EstAttaque(true);
       }
     }
-    if ( h.GetPosx() == posx && h.GetPosy() == posy-1 ) { //perso vers le haut
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
       if (h.estVivant() ){
 	int hp = h.GetPdv();
 	hp--;
@@ -117,22 +123,14 @@ void Monstre::seDeplacer(Personnage h, Map m){
 	h.EstAttaque(true);
       }
     }
-    if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) { //perso vers la droite
-      if (h.estVivant() ){
-	int hp = h.GetPdv();
-	hp--;
-	h.SetPdv(hp);
-	h.EstAttaque(true);
-      }
-    }
-    if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) { // perso vers le bas
-      if (h.estVivant() ){
-	int hp = h.GetPdv();
-	hp--;
-	h.SetPdv(hp);
-	h.EstAttaque(true);
-      }
-    }
+    if ( h.GetPosx() == posx && h.GetPosy() == posy ) { // perso vers le bas
+    if (h.estVivant() ){
+    int hp = h.GetPdv();
+    hp--;
+    h.SetPdv(hp);
+    h.EstAttaque(true);
+	}
+      }*/
   }
 		
   if (mod == 0){
@@ -150,8 +148,6 @@ void Monstre::seDeplacer(Personnage h, Map m){
 	deplacementAlea(h, m);
       }
       break;
-
-
     case 1:  
       if (m.estMur(posy,posx+1) && ( h.GetPosx() != posx )) {
 	posx += 1*taille_case;//deplacement vers la droite
@@ -167,7 +163,6 @@ void Monstre::seDeplacer(Personnage h, Map m){
       }else{
 	deplacementAlea(h, m);
       }
-
       break;
     case 3:  
       if (m.estMur(posy,posx-1) && ( h.GetPosx() != posx )) {
@@ -190,7 +185,7 @@ void Monstre::seDeplacer(Personnage h, Map m){
 
 
 
-void Monstre::deplacementAlea(Personnage h, Map m){
+void Monstre::deplacementAlea(Personnage &h, Map m){
     
   /* initialize random seed: */
   srand (time(NULL));
@@ -201,7 +196,7 @@ void Monstre::deplacementAlea(Personnage h, Map m){
 
 
   	
-  if ( h.GetPosx() == posx+1 && h.GetPosy() == posy ) { //perso vers la droite
+  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
     if (h.estVivant() != false){
       int hp = h.GetPdv();
       hp--;
@@ -209,7 +204,7 @@ void Monstre::deplacementAlea(Personnage h, Map m){
       h.EstAttaque(true);
     }
   }
-  if ( h.GetPosx() == posx && h.GetPosy() == posy-1 ) { //perso vers le haut
+  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers le haut
     if (h.estVivant() != false){
       int hp = h.GetPdv();
       hp--;
@@ -217,7 +212,7 @@ void Monstre::deplacementAlea(Personnage h, Map m){
       h.EstAttaque(true);
     }
   }
-  if ( h.GetPosx() == posx-1 && h.GetPosy() == posy ) { //perso vers la droite
+  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { //perso vers la droite
     if (h.estVivant() != false){
       int hp = h.GetPdv();
       hp--;
@@ -225,7 +220,7 @@ void Monstre::deplacementAlea(Personnage h, Map m){
       h.EstAttaque(true);
     }
   }
-  if ( h.GetPosx() == posx && h.GetPosy() == posy+1 ) { // perso vers le bas
+  if ( h.GetPosx() == posx && h.GetPosy() == posy ) { // perso vers le bas
     if (h.estVivant() != false){
       int hp = h.GetPdv();
       hp--;
