@@ -19,8 +19,8 @@ class Monstre : public Personnage
   bool stun;
    Monstre(std::string s, int p, int a, int x,int y);
   // methodes
-  void seDeplacer(Personnage h, Map m);
-  void deplacementAlea(Personnage h, Map m);
+  void seDeplacer(Personnage &h, Map m);
+  void deplacementAlea(Personnage &h, Map m);
   std::map<int,int> chercheChemin(Personnage h, Map m,  bool trouve, std::map<int,int> p);
 
 

@@ -19,7 +19,7 @@ public:
   Personnage();
   Personnage(std::string n, int p, int a, int x,int y);
   virtual void seDeplacer() {};
-  void attaquer(Personnage p);
+  void attaquer(Personnage &p);
   bool estVivant();
   void Attaque(bool b);
   void EstAttaque(bool b);

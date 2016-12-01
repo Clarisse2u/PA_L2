@@ -10,7 +10,7 @@
 
 #define taille_case 30
 
-void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre> tabMonstre)
+void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>& tabMonstre)
 {
 
   char tmp;
@@ -34,7 +34,9 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
 	case SDLK_SPACE:
 	  h.Attaque(false);
 	   int t = tabMonstre.size();
-	  
+	   for (int i = 0; i < t; i++)  {
+	     tabMonstre[i].estAttaque = false;
+	   }
 	  break;
 	}
       break;
@@ -92,7 +94,7 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
 	      }
 	      break;
 	    case 180:
-	      if ( mx == hx && my == (hy) ) {
+	      if ( mx == hx && my == hy ) {
 		h.attaquer(tabMonstre[i]);
 	      }
 	      break;

@@ -16,14 +16,14 @@
 int main(int argc, char *argv[])
 {
   int iter=0;
-  Monstre slime1 = Monstre("slime", 2, 1, 2*taille_case, 5*taille_case);
-  Monstre drag1 = Monstre("dragon", 2, 1, 10*taille_case, 5*taille_case);
+  Monstre slime1 = Monstre("slime", 4, 1, 2*taille_case, 5*taille_case);
+  Monstre drag1 = Monstre("dragon", 15, 3, 10*taille_case, 5*taille_case);
   std::vector <Monstre> tabMonstre(1,slime1);
   tabMonstre.push_back(drag1);
-  Hero h = Hero("Gandalf",1,2,24*taille_case/2,32*taille_case/2);
+  Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
-  int AffI = 0, cpt = 1, test = 0;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall1 = NULL, *Wall2 = NULL, *Ground1 = NULL;
+  int AffI = 0, cpt = 1;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL, *Ground2 = NULL, *GameWon = NULL, *Name = NULL;
   SDL_Rect PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
   
   Hero = SDL_LoadBMP("image/Mage_Bas_SD.bmp");
   Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
-  //Wall1 = SDL_LoadBMP("image/wall1.bmp");
   Wall2 = SDL_LoadBMP("image/Bush_30.bmp");
   Ground1 = SDL_LoadBMP("image/herbe_30.bmp");
   Ground2 = SDL_LoadBMP("image/terre_30.bmp");
@@ -204,66 +203,66 @@ int main(int argc, char *argv[])
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
 
       for (int i(0);i < tabMonstre.size();i++) {
-	if (tabMonstre[i].estAttaque) {
-	  printf("CAMEMBERT");
-	  Monstre = SDL_LoadBMP("image/Dragon_Degat.bmp");
-	} else if ( tabMonstre[i].nom == "slime") {
-	  tabMonstre[i].deplacementAlea(h, m);
-	  switch(tabMonstre[i].angle) {
-	  case 0:
-	    Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
-	    break;
-	  case 90:
-	    Monstre = SDL_LoadBMP("image/Slime_Gauche_HD.bmp");
-	    break;
-	  case 180:
-	    Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
-	    break;
-	  case 270:
-	    Monstre = SDL_LoadBMP("image/Slime_Droite_HD.bmp");
-	    break;
+	if ( !tabMonstre[i].vivant) {
+	} else {
+	  if (tabMonstre[i].estAttaque) {
+	    Monstre = SDL_LoadBMP("image/Dragon_Degat.bmp");
+	  } else if ( tabMonstre[i].nom == "slime") {
+	    tabMonstre[i].deplacementAlea(h, m);
+	    switch(tabMonstre[i].angle) {
+	    case 0:
+	      Monstre = SDL_LoadBMP("image/Slime_Bas_HD.bmp");
+	      break;
+	    case 90:
+	      Monstre = SDL_LoadBMP("image/Slime_Gauche_HD.bmp");
+	      break;
+	    case 180:
+	      Monstre = SDL_LoadBMP("image/Slime_Haut_HD.bmp");
+	      break;
+	    case 270:
+	      Monstre = SDL_LoadBMP("image/Slime_Droite_HD.bmp");
+	      break;
+	    }
 	  }
-	}
-	else if ( tabMonstre[i].nom == "dragon") {
-	  tabMonstre[i].seDeplacer(h, m);
-	  switch(tabMonstre[i].angle) {
-	  case 0:
-	    Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
-	    break;
-	  case 90:
-	    Monstre = SDL_LoadBMP("image/Dragon_Gauche_HD.bmp");
-	    break;
-	  case 180:
-	    Monstre = SDL_LoadBMP("image/Dragon_Haut_HD.bmp");
-	    break;
-	  case 270:
-	    Monstre = SDL_LoadBMP("image/Dragon_Droite_HD.bmp");
-	    break;
+	  else if ( tabMonstre[i].nom == "dragon") {
+	    tabMonstre[i].seDeplacer(h, m);
+	    switch(tabMonstre[i].angle) {
+	    case 0:
+	      Monstre = SDL_LoadBMP("image/Dragon_Bas_HD.bmp");
+	      break;
+	    case 90:
+	      Monstre = SDL_LoadBMP("image/Dragon_Gauche_HD.bmp");
+	      break;
+	    case 180:
+	      Monstre = SDL_LoadBMP("image/Dragon_Haut_HD.bmp");
+	      break;
+	    case 270:
+	      Monstre = SDL_LoadBMP("image/Dragon_Droite_HD.bmp");
+	      break;
+	    }
 	  }
-	}
-	else if ( tabMonstre[i].nom == "diablotin") {
-	  tabMonstre[i].seDeplacer(h, m);
-	  switch(tabMonstre[i].angle) {
-	  case 0:
-	    Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
-	    break;
-	  case 90:
-	    Monstre = SDL_LoadBMP("image/Diablotin_Gauche_HD.bmp");
-	    break;
-	  case 180:
-	    Monstre = SDL_LoadBMP("image/Diablotin_Haut_HD.bmp");
-	    break;
-	  case 270:
-	    Monstre = SDL_LoadBMP("image/Diablotin_Droite_HD.bmp");
-	    break;
+	  else if ( tabMonstre[i].nom == "diablotin") {
+	    tabMonstre[i].seDeplacer(h, m);
+	    switch(tabMonstre[i].angle) {
+	    case 0:
+	      Monstre = SDL_LoadBMP("image/Diablotin_Bas_HD.bmp");
+	      break;
+	    case 90:
+	      Monstre = SDL_LoadBMP("image/Diablotin_Gauche_HD.bmp");
+	      break;
+	    case 180:
+	      Monstre = SDL_LoadBMP("image/Diablotin_Haut_HD.bmp");
+	      break;
+	    case 270:
+	      Monstre = SDL_LoadBMP("image/Diablotin_Droite_HD.bmp");
+	      break;
+	    }
 	  }
+	  PosMonstre.x = tabMonstre[i].posx;
+	  PosMonstre.y = tabMonstre[i].posy;
+	  SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
 	}
-	PosMonstre.x = tabMonstre[i].posx;
-	PosMonstre.y = tabMonstre[i].posy;
-	SDL_BlitSurface(Monstre, NULL,  screen, &PosMonstre);
-
       }
-      
 
 
       for(int i=0; i<24; i++){
@@ -323,8 +322,7 @@ int main(int argc, char *argv[])
 	}
       }
       
-      test++;
-      if(test == 50)game = 2;
+      if(!h.pdv) game = 2;
 
       SDL_Flip(screen);
     }
@@ -345,7 +343,6 @@ int main(int argc, char *argv[])
   }
 
   SDL_FreeSurface(Hero);
-  SDL_FreeSurface(Wall1);
   SDL_FreeSurface(Wall2);
   SDL_FreeSurface(Ground1);
   SDL_FreeSurface(Tree1);
