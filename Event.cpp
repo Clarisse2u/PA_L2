@@ -23,13 +23,13 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
   switch(event.type)
     {
     case SDL_QUIT:
-      var = 1;
+      var = 3;
       break;
     case SDL_KEYUP:
       switch (event.key.keysym.sym)
 	{
 	case SDLK_ESCAPE:
-	  var = 1;
+	  var = 3;
 	  break;
 	case SDLK_SPACE:
 	  h.Attaque(false);
@@ -85,22 +85,22 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
 	    switch (ang) {
 	    case 0:
 	      if ( mx == hx && my == (hy) ) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    case 90:
 	      if ( mx == hx && my == hy) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    case 180:
 	      if ( mx == hx && my == hy ) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    case 270:
 	      if ( mx == hx && my == hy) {
-		h.attaquer(tabMonstre[i]);
+		h.attaquer(tabMonstre[i],m);
 	      }
 	      break;
 	    }
