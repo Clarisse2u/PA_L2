@@ -191,8 +191,8 @@ int main(int argc, char *argv[])
 
       for (int i(0);i < tabMonstre.size();i++) {
 	if (tabMonstre[i].estAttaque) {
+	  printf("CAMEMBERT");
 	  Monstre = SDL_LoadBMP("image/Dragon_Degat.bmp");
-	  printf("NIKTAMER");
 	} else if ( tabMonstre[i].nom == "slime") {
 	  tabMonstre[i].deplacementAlea(h, m);
 	  switch(tabMonstre[i].angle) {

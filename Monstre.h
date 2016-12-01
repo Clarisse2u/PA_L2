@@ -16,6 +16,7 @@ class Monstre : public Personnage
 {
  public:
   int it;
+  bool stun;
    Monstre(std::string s, int p, int a, int x,int y);
   // methodes
   void seDeplacer(Personnage h, Map m);

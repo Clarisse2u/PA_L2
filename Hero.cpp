@@ -18,6 +18,8 @@ Hero::Hero(std::string n, int p, int a,int x, int y) {
   lvl = 1;
   exp = 0;
   angle = 0;
+  attaque = false;
+  estAttaque = false;
   }
 
 
