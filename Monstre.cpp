@@ -188,7 +188,8 @@ void Monstre::seDeplacer(Personnage &h, Map m){
 void Monstre::deplacementAlea(Personnage &h, Map m){
     
   /* initialize random seed: */
-  srand (time(NULL));
+    srand (time(NULL));
+  
 
   /* generate secret number between 1 and 10: */
   int pos = rand() % 4 + 1;
