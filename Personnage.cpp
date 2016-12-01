@@ -3,6 +3,8 @@
 #include <string>
 #include "Personnage.h"
 
+#define taille_case 30
+
 
 Personnage::Personnage() {}
 
@@ -18,23 +20,25 @@ Personnage::Personnage(std::string n, int p, int a,int x, int y) {
   estAttaque = false;
 }
 
-void Personnage::attaquer(Personnage p){
+void Personnage::attaquer(Personnage &p){
   p.pdv -= atk;
   p.estAttaque = true;
-  printf("MDRRRRRRRRRRRRR\n");
   switch(p.angle) {
   case 0:
-    p.posx -= 1;
+    p.posx -= taille_case;
     break;
   case 90:
-    p.posy += 1;
+    p.posy += taille_case;
     break;
   case 180:
-    p.posx += 1;
+    p.posx += taille_case;
     break;
   case 270:
-    p.posy -= 1;
+    p.posy -= taille_case;
     break;
+  }
+  if (p.pdv < 1) {
+    p.vivant = false;
   }
 }
 
