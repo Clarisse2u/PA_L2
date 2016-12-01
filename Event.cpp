@@ -23,13 +23,13 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
   switch(event.type)
     {
     case SDL_QUIT:
-      var = 1;
+      var = 3;
       break;
     case SDL_KEYUP:
       switch (event.key.keysym.sym)
 	{
 	case SDLK_ESCAPE:
-	  var = 1;
+	  var = 3;
 	  break;
 	case SDLK_SPACE:
 	  h.Attaque(false);

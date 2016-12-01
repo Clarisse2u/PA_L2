@@ -22,12 +22,12 @@ int main(int argc, char *argv[])
   tabMonstre.push_back(drag1);
   Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
-  int AffI = 0, cpt = 1;
+  int AffI = 0, cpt = 1, pdv_base = h.pdv;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL, *Ground2 = NULL, *GameWon = NULL, *Name = NULL;
   SDL_Rect PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
-  SDL_Rect PdvPos, PosGameWon, PosName;
+  SDL_Rect PdvPosS, PdvPosD, PosGameWon, PosName;
   SDL_Event event;
   Map m = Map();
 
@@ -51,8 +51,13 @@ int main(int argc, char *argv[])
   BdvPos.y = 100;
 
   
-  PdvPos.x = taille_case*32+36;
-  PdvPos.y = 101;
+  PdvPosD.x = taille_case*32+36;
+  PdvPosD.y = 101;
+  PdvPosS.x = 0;
+  PdvPosS.y = 0;
+  PdvPosS.w = 100;
+  PdvPosS.h = 18;
+
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -290,8 +295,9 @@ int main(int argc, char *argv[])
       }
 
       //Affichage Menu Joueur
+      PdvPosS.w = h.pdv*100/pdv_base;
       SDL_BlitSurface(RecBdv, NULL, screen, &BdvPos);
-      SDL_BlitSurface(Pdv, NULL, screen, &PdvPos);
+      SDL_BlitSurface(Pdv, &PdvPosS, screen, &PdvPosD);
 
       //changement de map
 
