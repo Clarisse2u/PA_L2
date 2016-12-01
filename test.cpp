@@ -7,6 +7,7 @@
 #include "Hero.h"
 #include "Monstre.h"
 #include "Map.h"
+#include "Item.h"
 #include <vector>
 #include <map>
 #include <unistd.h>
@@ -20,13 +21,15 @@ int main(int argc, char *argv[])
   Monstre drag1 = Monstre("dragon", 15, 3, 10*taille_case, 5*taille_case);
   std::vector <Monstre> tabMonstre(1,slime1);
   tabMonstre.push_back(drag1);
+  Item item = Item("Vie", 6*taille_case, 5*taille_case);
+  std::vector <Item> tabItem(1,item);
   Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);
   int game = 0, MapNumber = 2, colorkey, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, AffichageMenu, Afftmpx = 0, Afftmpy = 0;
   int AffI = 0, cpt = 1;
-  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Hero = NULL, *Wall2 = NULL, *Ground1 = NULL;
+  SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Item = NULL, *Hero = NULL, *Wall2 = NULL, *Ground1 = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL, *Ground2 = NULL, *GameWon = NULL, *Name = NULL;
-  SDL_Rect PosHero, PosMonstre, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
+  SDL_Rect PosHero, PosMonstre, PosItem, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos, PosPlayerMenu;
   SDL_Rect PdvPos, PosGameWon, PosName;
   SDL_Event event;
   Map m = Map();
@@ -165,7 +168,7 @@ int main(int argc, char *argv[])
 	}
       }
       
-      // dessin du perso en fonction de l'angle 
+      // affichage du perso en fonction de l'angle 
       int ang = h.angle;
 
       
@@ -202,6 +205,26 @@ int main(int argc, char *argv[])
       }
       SDL_BlitSurface(Hero, NULL,  screen, &PosHero);
 
+      // affichage des items
+      for (int i(0);i < tabItem.size();i++) {
+	if (tabItem[i].nom == "Vie") {
+
+	  if (!tabItem[i].ramasse) {
+
+	    Item = SDL_LoadBMP("image/PotionVie.bmp");
+	    PosItem.x = tabItem[i].posx;
+	    PosItem.y = tabItem[i].posy;
+	    SDL_BlitSurface(Item, NULL,  screen, &PosItem); 
+
+	    if (tabItem[i].posx == h.posx && tabItem[i].posy == h.posy) {
+	      tabItem[i].ramasse = true;
+	    }
+	  }
+	}
+      }
+
+
+      // affichage des monstres
       for (int i(0);i < tabMonstre.size();i++) {
 	if ( !tabMonstre[i].vivant) {
 	} else {

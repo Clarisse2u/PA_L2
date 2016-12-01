@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string>
+#include "Map.h"
+
+#ifndef Personnage_H
+#define Personnage_H
+
+
+class Personnage {
+
+public:
+  // attributs
+  std::string nom;
+  int posx, posy;
+  bool ramasse;
+
+ // methodes
+  Item(std::string n, int x,int y);
+
+  };
+
+#endif
