@@ -388,7 +388,7 @@ int main(int argc, char *argv[])
       // verification
       // heros mort
       if(!h.pdv) game = 2;
-
+      printf("%d", fin_du_jeu);
       // plus de monstres
       if (fin_du_jeu == tabMonstre.size()) game = 1; 
       
