@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
   
   screen = SDL_SetVideoMode(32*taille_case+180, 24*taille_case, 32, SDL_HWSURFACE); // Ouvrir une fenetre
   SDL_EnableKeyRepeat(15, 150);
-  SDL_WM_SetCaption("Projet PA", NULL); //titre fenetre
+  SDL_WM_SetCaption("Projet PA, CLARISSE Raphael Giang Andre", NULL); //titre fenetre
 
   GameScreen = SDL_CreateRGBSurface(SDL_HWSURFACE, 32*taille_case, 24*taille_case, 32, 14, 158, 24, 0);
   SDL_FillRect(GameScreen, NULL, SDL_MapRGB(GameScreen->format, 14, 158, 24));
