@@ -18,30 +18,36 @@ int main(int argc, char *argv[])
 {
   Monstre slime1 = Monstre("slime", 4, 1, 2*taille_case, 5*taille_case, 2);
   Monstre slime2 = Monstre("slime", 4, 1, 16*taille_case, 15*taille_case, 2);
-   Monstre slime3 = Monstre("slime", 4, 1, 5*taille_case, 18*taille_case, 1);
-  /*Monstre slime4 = Monstre("slime", 4, 1, 25*taille_case, 3*taille_case, 1);
+  Monstre slime3 = Monstre("slime", 4, 1, 5*taille_case, 18*taille_case, 1);
+  Monstre slime4 = Monstre("slime", 4, 1, 25*taille_case, 3*taille_case, 1);
   Monstre slime5 = Monstre("slime", 4, 1, 17*taille_case, 14*taille_case, 1);
   Monstre slime6 = Monstre("slime", 4, 1, 20*taille_case, 10*taille_case, 3);
+  Monstre slime7 = Monstre("slime", 4, 1, 20*taille_case, 3*taille_case, 4);
+  Monstre slime8 = Monstre("slime", 4, 1, 24*taille_case, 7*taille_case, 4);
   Monstre drag1 = Monstre("dragon", 15, 3, 10*taille_case, 5*taille_case, 5);
   Monstre drag2 = Monstre("dragon", 15, 3, 21*taille_case, 3*taille_case, 5);
   Monstre diablotin1 = Monstre("diablotin", 6, 1, 18*taille_case, 18*taille_case, 2);
-  /* Monstre diablotin2 = Monstre("diablotin", 6, 1, 4*taille_case, 9*taille_case, 3);
-  Monstre diablotin3 = Monstre("diablotin", 6, 1, 9*taille_case, 15*taille_case, 3);*/
+  Monstre diablotin2 = Monstre("diablotin", 6, 1, 4*taille_case, 9*taille_case, 3);
+  Monstre diablotin3 = Monstre("diablotin", 6, 1, 9*taille_case, 15*taille_case, 3);
+  Monstre diablotin4 = Monstre("diablotin", 8, 2, 5*taille_case, 15*taille_case, 4);
   std::vector <Monstre> tabMonstre(1,slime1);
   tabMonstre.push_back(slime2);
   tabMonstre.push_back(slime3);
-  /* tabMonstre.push_back(slime4);
+  tabMonstre.push_back(slime4);
   tabMonstre.push_back(slime5);
   tabMonstre.push_back(slime6);
+  tabMonstre.push_back(slime7);
+  tabMonstre.push_back(slime8);
   tabMonstre.push_back(drag1);
   tabMonstre.push_back(drag2);
   tabMonstre.push_back(diablotin1);
   tabMonstre.push_back(diablotin2);
-  tabMonstre.push_back(diablotin3);*/
+  tabMonstre.push_back(diablotin3);
+  tabMonstre.push_back(diablotin4);
   Item item = Item("Vie", 6*taille_case, 5*taille_case, 2);
   std::vector <Item> tabItem(1,item);
   Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 2, colorkey_monstre, colorkey_hero, colorkey_item, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, pdv_base = h.pdv;
+  int game = 0, MapNumber = 1, colorkey_monstre, colorkey_hero, colorkey_item, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, pdv_base = h.pdv;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Item = NULL, *Hero = NULL, *Wall = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
   SDL_Surface *Pdv = NULL, *Ground1 = NULL, *Ground2 = NULL, *GameEnd = NULL, *Name = NULL;
@@ -365,6 +371,10 @@ int main(int argc, char *argv[])
 	  MapNumber=2;
 	  h.SetPosx(taille_case*1);
 	}
+	else if (MapNumber == 1 && h.posy == taille_case*0){
+	  MapNumber=4;
+	  h.SetPosy(taille_case*22);
+	}
 	else if (MapNumber == 2 && h.posx == taille_case*0){
 	  MapNumber=1;
 	  h.SetPosx(taille_case*30);
@@ -380,6 +390,10 @@ int main(int argc, char *argv[])
 	else if (MapNumber == 3 && h.posx == taille_case*0){
 	  MapNumber=2;
 	  h.SetPosx(taille_case*30);
+	}
+	else if (MapNumber == 4 && h.posy == taille_case*23){
+	  MapNumber=1;
+	  h.SetPosy(taille_case*1);
 	}
 	else if (MapNumber == 5 && h.posy == taille_case*23){
 	  MapNumber=2;
