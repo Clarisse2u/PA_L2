@@ -47,12 +47,12 @@ int main(int argc, char *argv[])
   Item item = Item("Vie", 6*taille_case, 5*taille_case, 2);
   std::vector <Item> tabItem(1,item);
   Hero h = Hero("Gandalf",18,2,24*taille_case/2,32*taille_case/2);
-  int game = 0, MapNumber = 1, colorkey_monstre, colorkey_hero, colorkey_item, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, pdv_base = h.pdv;
+  int game = 0, menu = 0, MapNumber = 1, colorkey_monstre, colorkey_hero, colorkey_item, xtmp = 0, ytmp = 0, xtmp2 = 0, ytmp2 = 0, pdv_base = h.pdv;
   SDL_Surface *screen = NULL, *GameScreen = NULL, *PlayerMenu = NULL,*Monstre = NULL, *Item = NULL, *Hero = NULL, *Wall = NULL;
   SDL_Surface *Way1 = NULL, *Tree1 = NULL, *Goodies1 = NULL, *Goodies2 = NULL, *Goodies3 = NULL, *Water1 = NULL, *RecBdv = NULL;
-  SDL_Surface *Pdv = NULL, *Ground1 = NULL, *Ground2 = NULL, *GameEnd = NULL, *Name = NULL;
+  SDL_Surface *Pdv = NULL, *Ground1 = NULL, *Ground2 = NULL, *GameEnd = NULL, *Name = NULL, *MenuScreen = NULL;
   SDL_Rect PosHero, PosMonstre, PosItem, GamePos, WallPos, GroundPos, WayPos, TreePosD, TreePosS, GoodiesPos, WaterPosS, WaterPosD, BdvPos;
-  SDL_Rect PdvPosS, PdvPosD, PosGameEnd, PosName, PosPlayerMenu;
+  SDL_Rect PdvPosS, PdvPosD, PosGameEnd, PosName, PosPlayerMenu, MenuPos;
   SDL_Event event;
   Map m = Map();
 
@@ -83,6 +83,9 @@ int main(int argc, char *argv[])
   PdvPosS.w = 100;
   PdvPosS.h = 18;
 
+  MenuPos.x = 0;
+  MenuPos.y = 0;
+
 
   SDL_Init(SDL_INIT_VIDEO);
   
@@ -110,6 +113,7 @@ int main(int argc, char *argv[])
   PlayerMenu = SDL_LoadBMP("image/Background_Menu.bmp");
   GameEnd = SDL_LoadBMP("image/GameWon.bmp");
   Name = SDL_LoadBMP("image/Name.bmp");
+  MenuScreen = SDL_LoadBMP("image/GameWon.bmp");
 
 
   
@@ -118,6 +122,12 @@ int main(int argc, char *argv[])
   colorkey_item = SDL_MapRGB(Item->format, 255,0,255);
 
   
+while(!menu){
+  HandleEnd(event,game, menu);
+	SDL_BlitSurface(MenuScreen, NULL, screen, &MenuPos);
+	SDL_Flip(screen);
+      }
+
 
   while(!game)
     {
@@ -413,7 +423,7 @@ int main(int argc, char *argv[])
 
   //gagné
   while (game == 1){
-    HandleEnd(event, game);
+    HandleEnd(event, game, menu);
     SDL_BlitSurface(GameEnd, NULL, screen, &PosGameEnd);
     SDL_Flip(screen);
   }
@@ -422,7 +432,7 @@ int main(int argc, char *argv[])
   //perdu
   while (game == 2){
     GameEnd = SDL_LoadBMP("image/GameOver.bmp");
-    HandleEnd(event, game);
+    HandleEnd(event, game, menu);
     SDL_BlitSurface(GameEnd, NULL, screen, &PosGameEnd);
     SDL_Flip(screen);
   }

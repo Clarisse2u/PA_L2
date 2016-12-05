@@ -104,40 +104,15 @@ void HandleEvent(SDL_Event event, int &var, Hero &h, Map m, std::vector<Monstre>
 	      }
 	      break;
 	    }
-	  }
-
+	  } 
 	}
       break;
     }
 }
 
-/*
- switch (ang) {
-	    case 0:
-	      if ( mx == hx && my == (hy+taille_case) ) {
-		h.attaquer(tabMonstre[i]);
-	      }
-	      break;
-	    case 90:
-	      if ( mx == hx-taille_case && my == hy) {
-		h.attaquer(tabMonstre[i]);
-	      }
-	      break;
-	    case 180:
-	      if ( mx == hx && my == (hy-taille_case) ) {
-		h.attaquer(tabMonstre[i]);
-	      }
-	      break;
-	    case 270:
-	      if ( mx == hx+taille_case && my == hy) {
-		h.attaquer(tabMonstre[i]);
-	      }
-	      break;
-	    }
-*/
 
 
-void HandleEnd(SDL_Event event, int &var){
+void HandleEnd(SDL_Event event, int &var, int &var2){
   SDL_PollEvent(&event);
   switch(event.type)
     {
@@ -145,9 +120,12 @@ void HandleEnd(SDL_Event event, int &var){
       var = 3;
       break;
     case SDL_KEYDOWN:
-      switch (event.key.keysym.sym)
+      switch (event.key.keysym.sym){
       case SDLK_ESCAPE:
 	var = 3;
       break;
+      case SDLK_SPACE:
+	if(!var2) var2 = 1;
+      }
     }
 }
