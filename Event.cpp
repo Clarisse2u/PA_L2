@@ -123,8 +123,9 @@ void HandleEnd(SDL_Event event, int &var, int &var2){
       switch (event.key.keysym.sym){
       case SDLK_ESCAPE:
 	var = 3;
+	var2 = 1;
       break;
-      case SDLK_SPACE:
+      case SDLK_RETURN:
 	if(!var2) var2 = 1;
       }
     }

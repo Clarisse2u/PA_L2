@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
   PlayerMenu = SDL_LoadBMP("image/Background_Menu.bmp");
   GameEnd = SDL_LoadBMP("image/GameWon.bmp");
   Name = SDL_LoadBMP("image/Name.bmp");
-  MenuScreen = SDL_LoadBMP("image/GameWon.bmp");
+  MenuScreen = SDL_LoadBMP("image/Menu.bmp");
 
 
   
